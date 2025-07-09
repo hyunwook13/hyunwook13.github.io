@@ -32,6 +32,8 @@ sidebar: []
 
 Put the math expression within <span>$</span>...\$:
 
+Test
+
 \\(\LaTeX{}\\)
 
 $\Pi$
