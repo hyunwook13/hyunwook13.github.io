@@ -2,6 +2,7 @@
 layout: post
 title: 25장 - 계층과 경계
 tags: [clean-architecture]
+date: 2025-07-22 10:00:01 +0900
 ---
 
 - 시스템이 세가지 컴포넌트로만 구성된다고 생각하기 쉬움

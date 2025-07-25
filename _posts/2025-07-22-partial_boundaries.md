@@ -2,6 +2,7 @@
 layout: post
 title: 24장 - 부분적 경계
 tags: [clean-architecture]
+date: 2025-07-22 10:00:00 +0900
 ---
 
 - 아키텍쳐 경게를 완벽하게 만드는 데에는 많은 비용이 든다
