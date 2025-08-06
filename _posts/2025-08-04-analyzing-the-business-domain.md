@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 1장 - 비즈니스 도메인 분석하기
+title: 1 - 비즈니스 도메인 분석하기
 tags: [DDD, Domain-Driven-Develop]
 date: 2025-08-04 10:00:00 +0900
 ---
