@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/jekyll-theme-yat/feed.xml" rel="self" type="application/atom+xml" /><link href="/jekyll-theme-yat/" rel="alternate" type="text/html" /><updated>2025-10-28T09:46:35+00:00</updated><id>/jekyll-theme-yat/feed.xml</id><title type="html">Avoid Nil</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>Hyunwook Lee</name></author><entry><title type="html">KWDC25 후기</title><link href="/jekyll-theme-yat/2025/09/05/after-kwdc25.html" rel="alternate" type="text/html" title="KWDC25 후기" /><published>2025-09-05T01:00:00+00:00</published><updated>2025-09-05T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/09/05/after-kwdc25</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/05/after-kwdc25.html"><![CDATA[<h3 id="kwdc25-다녀온-후기">KWDC25 다녀온 후기</h3>
+
+<p>이번에 처음으로 <strong>KWDC25</strong> 컨퍼런스에 다녀왔다.<br />
+행사장에서 다양한 사람들을 만나고 사진도 찍으며 뜻깊은 시간을 보냈다.<br />
+특히, <strong>술을 제공하는 컨퍼런스</strong>라는 점이 인상적이었고,<br />
+처음엔 규모가 꽤 크다고 느꼈지만 다른 분들의 이야기를 들어보니<br />
+생각보다 아담한 행사라는 걸 알게 되었다.</p>
+
+<p>중간중간 흥미로운 세션들도 있었고,<br />
+마지막에는 <strong>우산 경품</strong>에 당첨되어 더욱 기분 좋게 마무리할 수 있었다</p>
+
+<p>행사가 끝난 뒤에는 옆자리 분과 함께 닭갈비를 먹으며 이야기를 나눴고,<br />
+그분께 내 이력서를 보여드렸더니 좋은 피드백을 받을 수 있었다.</p>
+
+<p>이번 경험을 통해 많이 배우고,<br />
+앞으로 더 열심히 성장해야겠다는 다짐을 하게 되었다.</p>
+
+<p><img src="/assets/images/kwdc25/place-1.jpeg" alt="장소1" />
+<img src="/assets/images/kwdc25/place-2.jpeg" alt="장소2" />
+<img src="/assets/images/kwdc25/review-1.jpeg" alt="세션" />
+<img src="/assets/images/kwdc25/me-1.jpeg" alt="나1" />
+<img src="/assets/images/kwdc25/me-2.jpeg" alt="나2" />
+<img src="/assets/images/kwdc25/me-3.jpeg" alt="나3" /></p>]]></content><author><name>Hyunwook Lee</name></author><category term="kwdc25" /><category term="review" /><summary type="html"><![CDATA[KWDC25 다녀온 후기]]></summary></entry><entry><title type="html">Core Animation - Advanced Animation Tricks</title><link href="/jekyll-theme-yat/2025/09/02/core-animation-advanced-animation-tricks.html" rel="alternate" type="text/html" title="Core Animation - Advanced Animation Tricks" /><published>2025-09-02T01:00:00+00:00</published><updated>2025-09-02T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/09/02/core-animation-advanced-animation-tricks</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/02/core-animation-advanced-animation-tricks.html"><![CDATA[<ul>
+  <li>기존엔 Property Animation로써 단순 이동, 투명해지는 효과였다면 Transition Animation이 존재함
+    <ul>
+      <li>뷰를 밀거나 위에서 들어오거나 서서히 바뀌는 효과등이 존재</li>
+    </ul>
+
+    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">let</span> <span class="nv">transition</span> <span class="o">=</span> <span class="kt">CATransition</span><span class="p">()</span>
+  <span class="n">transition</span><span class="o">.</span><span class="n">startProgress</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">transition</span><span class="o">.</span><span class="n">endProgress</span> <span class="o">=</span> <span class="mf">1.0</span>
+  <span class="n">transition</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="o">.</span><span class="n">push</span>
+  <span class="n">transition</span><span class="o">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="o">.</span><span class="n">fromRight</span>
+  <span class="n">transition</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0</span>
+    
+  <span class="n">myView1</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">transition</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"transition"</span><span class="p">)</span>
+  <span class="n">myView2</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">transition</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"transition"</span><span class="p">)</span>
+    
+  <span class="n">myView1</span><span class="o">.</span><span class="n">isHidden</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="n">myView2</span><span class="o">.</span><span class="n">isHidden</span> <span class="o">=</span> <span class="kc">false</span>
+</code></pre></div>    </div>
+  </li>
+  <li>애니메이션의 타이밍은 중요하고, 그러므로 더 세세하게 컨트롤 가능
+    <ul>
+      <li>
+        <p><strong>시작 시점 제어</strong> → beginTime</p>
+
+        <p>→ “애니메이션 A 끝나고 B 시작” 같은 체이닝 가능</p>
+      </li>
+      <li>
+        <p><strong>종료 후 상태 유지</strong> → fillMode</p>
+
+        <p>→ “애니메이션 끝나도 원래 값으로 튀지 말고, 마지막 상태 그대로 보여줘”</p>
+      </li>
+      <li>
+        <p><strong>왕복 &amp; 반복</strong> → autoreverses, repeatCount</p>
+
+        <p>→ 펄스 효과, 흔들림 효과 만들 때 유용</p>
+      </li>
+      <li>
+        <p><strong>시간 변형</strong> → speed, timeOffset</p>
+
+        <p>→ 전체 애니메이션 빠르게/느리게, 특정 구간만 늦게 시작</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>애니메이션을 멈췄다가 다시 진행 가능</p>
+
+    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">func</span> <span class="nf">pauseLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt">CALayer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">pausedTime</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="nf">convertTime</span><span class="p">(</span><span class="kt">CACurrentMediaTime</span><span class="p">(),</span> <span class="nv">from</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mf">0.0</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">timeOffset</span> <span class="o">=</span> <span class="n">pausedTime</span>
+  <span class="p">}</span>
+    
+  <span class="kd">func</span> <span class="nf">resumeLayer</span><span class="p">(</span><span class="n">_</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt">CALayer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">pausedTime</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">timeOffset</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mf">1.0</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">timeOffset</span> <span class="o">=</span> <span class="mf">0.0</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">beginTime</span> <span class="o">=</span> <span class="mf">0.0</span>
+      <span class="k">let</span> <span class="nv">timeSincePause</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="nf">convertTime</span><span class="p">(</span><span class="kt">CACurrentMediaTime</span><span class="p">(),</span> <span class="nv">from</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-</span> <span class="n">pausedTime</span>
+      <span class="n">layer</span><span class="o">.</span><span class="n">beginTime</span> <span class="o">=</span> <span class="n">timeSincePause</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>트랜잭션
+    <ul>
+      <li>묵시적 애니메이션은 트랜잭션을 자동으로 만들어서 실행해줌</li>
+      <li>명시적은 트랜잭션을 만들어서 사용하고, 그 내부에 여러가지 요소를 넣어 한꺼번에 처리를 할 수 있음</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[기존엔 Property Animation로써 단순 이동, 투명해지는 효과였다면 Transition Animation이 존재함 뷰를 밀거나 위에서 들어오거나 서서히 바뀌는 효과등이 존재 let transition = CATransition() transition.startProgress = 0 transition.endProgress = 1.0 transition.type = .push transition.subtype = .fromRight transition.duration = 1.0 myView1.layer.add(transition, forKey: "transition") myView2.layer.add(transition, forKey: "transition") myView1.isHidden = true myView2.isHidden = false 애니메이션의 타이밍은 중요하고, 그러므로 더 세세하게 컨트롤 가능 시작 시점 제어 → beginTime → “애니메이션 A 끝나고 B 시작” 같은 체이닝 가능 종료 후 상태 유지 → fillMode → “애니메이션 끝나도 원래 값으로 튀지 말고, 마지막 상태 그대로 보여줘” 왕복 &amp; 반복 → autoreverses, repeatCount → 펄스 효과, 흔들림 효과 만들 때 유용 시간 변형 → speed, timeOffset → 전체 애니메이션 빠르게/느리게, 특정 구간만 늦게 시작 애니메이션을 멈췄다가 다시 진행 가능 func pauseLayer(_ layer: CALayer) { let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil) layer.speed = 0.0 layer.timeOffset = pausedTime } func resumeLayer(_ layer: CALayer) { let pausedTime = layer.timeOffset layer.speed = 1.0 layer.timeOffset = 0.0 layer.beginTime = 0.0 let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime layer.beginTime = timeSincePause } 트랜잭션 묵시적 애니메이션은 트랜잭션을 자동으로 만들어서 실행해줌 명시적은 트랜잭션을 만들어서 사용하고, 그 내부에 여러가지 요소를 넣어 한꺼번에 처리를 할 수 있음]]></summary></entry><entry><title type="html">Core Animation - Changing a Layer’s Default Behavior</title><link href="/jekyll-theme-yat/2025/09/02/core-animation-changing-a-layers-default-behavior.html" rel="alternate" type="text/html" title="Core Animation - Changing a Layer’s Default Behavior" /><published>2025-09-02T01:00:00+00:00</published><updated>2025-09-02T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/09/02/core-animation-changing-a-layers-default-behavior</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/02/core-animation-changing-a-layers-default-behavior.html"><![CDATA[<ul>
+  <li>
+    <p>CAAction을 상속하여 기본 액션 대신 내가 원하는 액션을 사용할 수 있음</p>
+
+    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">import</span> <span class="kt">UIKit</span>
+  <span class="kd">import</span> <span class="kt">QuartzCore</span>
+    
+  <span class="c1">// 커스텀 액션: position 속성이 바뀌면 파란색으로 변하는 애니메이션 실행</span>
+  <span class="kd">class</span> <span class="kt">CustomAction</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CAAction</span> <span class="p">{</span>
+      <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="n">forKey</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+               <span class="n">object</span> <span class="nv">anObject</span><span class="p">:</span> <span class="kt">Any</span><span class="p">,</span>
+               <span class="n">arguments</span> <span class="nv">dict</span><span class="p">:</span> <span class="p">[</span><span class="kt">AnyHashable</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="p">{</span>
+            
+          <span class="k">if</span> <span class="k">let</span> <span class="nv">layer</span> <span class="o">=</span> <span class="n">anObject</span> <span class="k">as?</span> <span class="kt">CALayer</span> <span class="p">{</span>
+              <span class="nf">print</span><span class="p">(</span><span class="s">"🔥 Action triggered for key: </span><span class="se">\(</span><span class="n">event</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+                
+              <span class="c1">// position 변경일 때</span>
+              <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s">"position"</span> <span class="p">{</span>
+                  <span class="k">let</span> <span class="nv">anim</span> <span class="o">=</span> <span class="kt">CABasicAnimation</span><span class="p">(</span><span class="nv">keyPath</span><span class="p">:</span> <span class="s">"backgroundColor"</span><span class="p">)</span>
+                  <span class="n">anim</span><span class="o">.</span><span class="n">fromValue</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">backgroundColor</span>
+                  <span class="n">anim</span><span class="o">.</span><span class="n">toValue</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">blue</span><span class="o">.</span><span class="n">cgColor</span>
+                  <span class="n">anim</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0</span>
+                    
+                  <span class="n">layer</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">anim</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"bgColorChange"</span><span class="p">)</span>
+                  <span class="n">layer</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">blue</span><span class="o">.</span><span class="n">cgColor</span>
+              <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+    
+  <span class="c1">// 레이어 생성</span>
+  <span class="k">let</span> <span class="nv">myLayer</span> <span class="o">=</span> <span class="kt">CALayer</span><span class="p">()</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">cgColor</span>
+    
+  <span class="c1">// position 속성이 바뀔 때 실행할 액션 등록</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s">"position"</span><span class="p">:</span> <span class="kt">CustomAction</span><span class="p">()]</span>
+    
+  <span class="c1">// 이 순간 → position 바뀌면서 색상도 파란색으로 바뀌는 애니메이션 실행됨</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="kt">CGPoint</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>액션을 찾는 과정
+    <ol>
+      <li><strong>Delegate</strong>
+        <ul>
+          <li>레이어에 delegate가 있고</li>
+          <li>actionForLayer(_:forKey:) 구현되어 있으면 → 반환된 액션 실행</li>
+          <li>nil → 다음 단계</li>
+          <li>NSNull → 검색 종료, 액션 없음</li>
+        </ul>
+
+        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="kt">MyLayerDelegate</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CALayerDelegate</span> <span class="p">{</span>
+     <span class="kd">func</span> <span class="nf">action</span><span class="p">(</span><span class="k">for</span> <span class="nv">layer</span><span class="p">:</span> <span class="kt">CALayer</span><span class="p">,</span> <span class="n">forKey</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CAAction</span><span class="p">?</span> <span class="p">{</span>
+         <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s">"contents"</span> <span class="p">{</span>
+             <span class="k">let</span> <span class="nv">transition</span> <span class="o">=</span> <span class="kt">CATransition</span><span class="p">()</span>
+             <span class="n">transition</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0</span>
+             <span class="n">transition</span><span class="o">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="kt">CAMediaTimingFunction</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="o">.</span><span class="n">easeIn</span><span class="p">)</span>
+             <span class="n">transition</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="o">.</span><span class="n">push</span>
+             <span class="n">transition</span><span class="o">.</span><span class="n">subtype</span> <span class="o">=</span> <span class="o">.</span><span class="n">fromRight</span>
+             <span class="k">return</span> <span class="n">transition</span>
+         <span class="p">}</span>
+         <span class="k">return</span> <span class="kc">nil</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+        
+ <span class="k">let</span> <span class="nv">myLayer</span> <span class="o">=</span> <span class="kt">CALayer</span><span class="p">()</span>
+ <span class="k">let</span> <span class="nv">delegate</span> <span class="o">=</span> <span class="kt">MyLayerDelegate</span><span class="p">()</span>
+ <span class="n">myLayer</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">delegate</span>
+        
+ <span class="c1">// 👉 이때 contents 바꾸면 push transition 애니메이션 실행</span>
+ <span class="n">myLayer</span><span class="o">.</span><span class="n">contents</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"newImage"</span><span class="p">)?</span><span class="o">.</span><span class="n">cgImage</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><strong>Layer의 actions 딕셔너리</strong></p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> myLayer.actions = ["contents": myCustomAction]
+</code></pre></div>        </div>
+      </li>
+      <li><strong>Style 딕셔너리 안의 actions</strong>
+        <ul>
+          <li>style[“actions”] 안에서 검색</li>
+        </ul>
+      </li>
+      <li><strong>defaultActionForKey(_:)</strong>
+        <ul>
+          <li>서브클래싱해서 오버라이드 가능</li>
+        </ul>
+      </li>
+      <li><strong>Core Animation 기본 암묵적 애니메이션</strong> 실행</li>
+    </ol>
+  </li>
+  <li><strong>내가 Action을 넣을 수 있는 방법</strong>
+    <ul>
+      <li><strong>특정 상황에서만 필요</strong> → Delegate 방식 사용</li>
+      <li><strong>Delegate 안 쓰는 레이어</strong> → actions 딕셔너리 사용</li>
+      <li><strong>내가 만든 커스텀 속성용</strong> → style 딕셔너리에 추가</li>
+      <li><strong>레이어 기본 동작 자체 바꾸고 싶음</strong> → 서브클래싱 후 defaultActionForKey(_:) 오버라이드</li>
+    </ul>
+  </li>
+  <li>애니메이션을 비활성화 할 수 있음
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">CATransaction.setValue(true, forKey: kCATransactionDisableActions)</code></li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[CAAction을 상속하여 기본 액션 대신 내가 원하는 액션을 사용할 수 있음 import UIKit import QuartzCore // 커스텀 액션: position 속성이 바뀌면 파란색으로 변하는 애니메이션 실행 class CustomAction: NSObject, CAAction { func run(forKey event: String, object anObject: Any, arguments dict: [AnyHashable : Any]?) { if let layer = anObject as? CALayer { print("🔥 Action triggered for key: \(event)") // position 변경일 때 if event == "position" { let anim = CABasicAnimation(keyPath: "backgroundColor") anim.fromValue = layer.backgroundColor anim.toValue = UIColor.blue.cgColor anim.duration = 1.0 layer.add(anim, forKey: "bgColorChange") layer.backgroundColor = UIColor.blue.cgColor } } } } // 레이어 생성 let myLayer = CALayer() myLayer.frame = CGRect(x: 50, y: 50, width: 100, height: 100) myLayer.backgroundColor = UIColor.red.cgColor // position 속성이 바뀔 때 실행할 액션 등록 myLayer.actions = ["position": CustomAction()] // 이 순간 → position 바뀌면서 색상도 파란색으로 바뀌는 애니메이션 실행됨 myLayer.position = CGPoint(x: 200, y: 200) 액션을 찾는 과정 Delegate 레이어에 delegate가 있고 actionForLayer(_:forKey:) 구현되어 있으면 → 반환된 액션 실행 nil → 다음 단계 NSNull → 검색 종료, 액션 없음 class MyLayerDelegate: NSObject, CALayerDelegate { func action(for layer: CALayer, forKey event: String) -&gt; CAAction? { if event == "contents" { let transition = CATransition() transition.duration = 1.0 transition.timingFunction = CAMediaTimingFunction(name: .easeIn) transition.type = .push transition.subtype = .fromRight return transition } return nil } } let myLayer = CALayer() let delegate = MyLayerDelegate() myLayer.delegate = delegate // 👉 이때 contents 바꾸면 push transition 애니메이션 실행 myLayer.contents = UIImage(named: "newImage")?.cgImage Layer의 actions 딕셔너리 myLayer.actions = ["contents": myCustomAction] Style 딕셔너리 안의 actions style[“actions”] 안에서 검색 defaultActionForKey(_:) 서브클래싱해서 오버라이드 가능 Core Animation 기본 암묵적 애니메이션 실행 내가 Action을 넣을 수 있는 방법 특정 상황에서만 필요 → Delegate 방식 사용 Delegate 안 쓰는 레이어 → actions 딕셔너리 사용 내가 만든 커스텀 속성용 → style 딕셔너리에 추가 레이어 기본 동작 자체 바꾸고 싶음 → 서브클래싱 후 defaultActionForKey(_:) 오버라이드 애니메이션을 비활성화 할 수 있음 CATransaction.setValue(true, forKey: kCATransactionDisableActions)]]></summary></entry><entry><title type="html">Core Animation - Improving Animation Performance</title><link href="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html" rel="alternate" type="text/html" title="Core Animation - Improving Animation Performance" /><published>2025-09-02T01:00:00+00:00</published><updated>2025-09-02T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html"><![CDATA[<ul>
+  <li>코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님
+    <ul>
+      <li>레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다</li>
+    </ul>
+  </li>
+  <li>
+    <p>NSView의 기본 redraw 정책은 <strong>원래의 그리기 방식</strong>을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음</p>
+
+    <p>→ 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 <strong><code class="language-plaintext highlighter-rouge">NSViewLayerContentsRedrawOnSetNeedsDisplay</code> 권장</strong></p>
+  </li>
+  <li>레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다</li>
+</ul>
+
+<h3 id="팁">팁</h3>
+
+<ol>
+  <li><strong>가능한 경우 Opaque Layers(불투명 레이어) 사용</strong>
+    <ol>
+      <li>opaque = YES로 설정</li>
+    </ol>
+  </li>
+  <li>CAShapeLayer에서는 단순한 Path 사용
+    <ol>
+      <li>주어진 path를 통해 비트맵을 랜더링하는데, 복잡하거나 크기가 자주 변하면 CPU 성능 떨어짐</li>
+    </ol>
+
+    <p>→ 복잡한 path를 여러 개의 단순한 shape 레이어로 쪼개서 GPU 합성(compositing)에 맡기면 훨씬 빠를 수 있습니다.</p>
+  </li>
+  <li>동일한 레이어는 contents를 직접 설정
+    <ol>
+      <li>테이블셀에 하트 버튼이 존재한다면 이미지를 바로 콘텐츠에 넣음</li>
+      <li>만약 따로 만들게 되면 비트맵을 각각 만들어서 사용함</li>
+    </ol>
+  </li>
+  <li><strong>레이어 크기는 정수 값으로 설정</strong>
+    <ol>
+      <li>100.5 같은 반올림 크기는 내부적으로 추가 연산이 필요 → 성능 저하 가능.</li>
+    </ol>
+  </li>
+  <li><strong>필요할 때만 비동기 렌더링(drawsAsynchronously) 사용</strong>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">layer.drawsAsynchronously = true</code> 를 통해서 랜더링을 비동기로 돌려서 메인쓰레드의 점유율을 낮춤</li>
+    </ol>
+  </li>
+  <li><strong>그림자(Shadow)는  shadowPath 지정</strong>
+    <ol>
+      <li>그림자 경계를 자동 계산하는 건 비용이 큼</li>
+    </ol>
+  </li>
+</ol>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님 레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다 NSView의 기본 redraw 정책은 원래의 그리기 방식을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음 → 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 NSViewLayerContentsRedrawOnSetNeedsDisplay 권장 레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다]]></summary></entry><entry><title type="html">Core Animation - Build Animation</title><link href="/jekyll-theme-yat/2025/09/01/core-animation-build-animation.html" rel="alternate" type="text/html" title="Core Animation - Build Animation" /><published>2025-09-01T01:03:00+00:00</published><updated>2025-09-01T01:03:00+00:00</updated><id>/jekyll-theme-yat/2025/09/01/core-animation-build-animation</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/01/core-animation-build-animation.html"><![CDATA[<ul>
+  <li><strong>레이어 계층 관리 메서드</strong></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">동작</th>
+      <th style="text-align: left">메서드</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">레이어 추가</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">addSublayer:</code></td>
+      <td style="text-align: left">새로운 서브레이어를 현재 레이어에 추가. 배열의 끝에 들어가므로 같은 <code class="language-plaintext highlighter-rouge">zPosition</code>일 때는 제일 위에 표시됨.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">레이어 삽입</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">insertSublayer:atIndex:</code></td>
+      <td style="text-align: left">서브레이어 배열의 특정 인덱스 또는 다른 레이어 기준 위/아래에 삽입. 실제 표시 순서는 <code class="language-plaintext highlighter-rouge">zPosition</code> 값이 우선, 그다음 배열 순서가 반영됨.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">^^</td>
+      <td style="text-align: left">^^ <code class="language-plaintext highlighter-rouge">insertSublayer:above:</code></td>
+      <td style="text-align: left">^^</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">^^</td>
+      <td style="text-align: left">^^ <code class="language-plaintext highlighter-rouge">insertSublayer:below:</code></td>
+      <td style="text-align: left">^^</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">레이어 제거</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">removeFromSuperlayer</code></td>
+      <td style="text-align: left">현재 레이어에서 부모(<code class="language-plaintext highlighter-rouge">superlayer</code>)와의 관계를 끊고 제거.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">레이어 교체</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">replaceSublayer:with:</code></td>
+      <td style="text-align: left">기존 서브레이어를 다른 레이어로 교체. 교체할 레이어가 이미 다른 계층에 있으면 자동 제거 후 새 계층에 추가됨.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>서브레이어에는 <strong>크기(bounds)</strong> 와 <strong>위치(position)</strong>를 지정해야 화면에 출력됨</p>
+
+    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">myLayer</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="kt">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="c1">// 크기 100x100</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="kt">CGPointMake</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>   <span class="c1">// 부모 좌표에서 (200,200)에 배치</span>
+</code></pre></div>    </div>
+  </li>
+  <li>부모의 속성은 자식 레이어에도 전달됨</li>
+  <li>부모 레이어에서 자식 레이어의 위치나 크기를 자동으로 조정 가능
+    <ul>
+      <li>위치 특정 위치( midX, midY 등 )로 정렬</li>
+      <li>크기, 상대 배치 ( A를 기준으로 10정도 떨어져라 )
+        <ul>
+          <li>iOS → 오토레이아웃 이용</li>
+          <li>macOS → Core Animation 자체의 제약(Constraints) 시스템 제공</li>
+        </ul>
+
+        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">layerA</span><span class="o">.</span><span class="nf">addConstraint</span><span class="p">(</span><span class="kt">CAConstraint</span><span class="p">(</span><span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">midX</span><span class="p">,</span>
+                                    <span class="nv">relativeTo</span><span class="p">:</span> <span class="s">"superlayer"</span><span class="p">,</span>
+                                    <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">midX</span><span class="p">))</span>
+  <span class="n">layerA</span><span class="o">.</span><span class="nf">addConstraint</span><span class="p">(</span><span class="kt">CAConstraint</span><span class="p">(</span><span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">midY</span><span class="p">,</span>
+                                    <span class="nv">relativeTo</span><span class="p">:</span> <span class="s">"superlayer"</span><span class="p">,</span>
+                                    <span class="nv">attribute</span><span class="p">:</span> <span class="o">.</span><span class="n">midY</span><span class="p">))</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Coordinate Conversion (좌표 변환)</strong>
+    <ul>
+      <li>때때로 <strong>한 레이어 좌표계의 점/사각형을 다른 레이어 좌표계로 바꿔야</strong> 할 때 있음.</li>
+      <li>CALayer 제공 메서드:
+        <ul>
+          <li>convertPoint(<em>:from:), convertPoint(</em>:to:)</li>
+          <li>convertRect(<em>:from:), convertRect(</em>:to:)</li>
+        </ul>
+      </li>
+      <li>시간(time) 변환도 가능:
+        <ul>
+          <li>convertTime(<em>:from:), convertTime(</em>:to:)</li>
+          <li>애니메이션 속도를 다르게 준 레이어끼리 타이밍 맞출 때 사용.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[레이어 계층 관리 메서드]]></summary></entry><entry><title type="html">Core Animation - Animating</title><link href="/jekyll-theme-yat/2025/09/01/core-animation-animating.html" rel="alternate" type="text/html" title="Core Animation - Animating" /><published>2025-09-01T01:02:00+00:00</published><updated>2025-09-01T01:02:00+00:00</updated><id>/jekyll-theme-yat/2025/09/01/core-animation-animating</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/01/core-animation-animating.html"><![CDATA[<ul>
+  <li>암시적, 명시적 애니메이션이 존재
+    <ul>
+      <li>layer.opacity = 0.0 → 자연스러운 페이드 아웃</li>
+      <li>CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능
+        <ul>
+          <li>팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것
+    <ul>
+      <li>
+        <p>만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨
+  <img src="/assets/images/coreanimation/core-4.png" alt="image.png" /></p>
+      </li>
+      <li>
+        <p>배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함</p>
+        <ul>
+          <li>숫자 (opacity, cornerRadius) → NSNumber</li>
+          <li>사각형 (frame, bounds) → NSValue(CGRect)</li>
+          <li>좌표 (position) → NSValue(CGPoint) 배열 <strong>또는</strong> CGPath</li>
+          <li>색상 (borderColor) → CGColor</li>
+          <li>이미지 (contents) → CGImage 배열</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Keyframe Animation Timing</strong></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">**모드 (calculationMode)**</th>
+      <th style="text-align: left">**동작 방식**</th>
+      <th style="text-align: left">**특징 / 예시**</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">**kCAAnimationLinear**</td>
+      <td style="text-align: left">키프레임 값 사이를 직선적으로 보간</td>
+      <td style="text-align: left">기본 직선 보간, 구간별 시간·이징 직접 지정 가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**kCAAnimationCubic**</td>
+      <td style="text-align: left">키프레임 값 사이를 곡선(스플라인)으로 보간</td>
+      <td style="text-align: left">더 부드러운 곡선 애니메이션</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**kCAAnimationPaced**</td>
+      <td style="text-align: left">Core Animation이 속도를 자동 계산해 일정하게 이동</td>
+      <td style="text-align: left">전체 경로를 따라 **등속 이동**, 타이밍 직접 지정 불가</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**kCAAnimationCubicPaced**</td>
+      <td style="text-align: left">곡선을 따라 등속 이동</td>
+      <td style="text-align: left">곡선 경로 + 속도 일정</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**kCAAnimationDiscrete**</td>
+      <td style="text-align: left">키프레임 값 사이에 보간 없음 → 점프 이동</td>
+      <td style="text-align: left">값이 뚝뚝 바뀌는 애니메이션 (예: 스프라이트 프레임 전환)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>추가한 애니메이션은 삭제 가능
+    <ul>
+      <li>removeAnimation() or removeAllAnimations()</li>
+      <li>허나 애니메이션 도중 삭제한다면 도중에 텔레포트를 진행함</li>
+      <li>
+        <p>presentation() 를 통해서 현재 레이어 위치를 알아내고, 포지션은 변경</p>
+
+        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 1) 특정 애니메이션 제거</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="nf">removeAnimation</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"move"</span><span class="p">)</span>
+        
+  <span class="c1">// 2) 모든 애니메이션 제거</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="nf">removeAllAnimations</span><span class="p">()</span>
+        
+  <span class="c1">// 3) 멈춘 시점의 상태 유지 (presentation 값 반영)</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">pres</span> <span class="o">=</span> <span class="n">myLayer</span><span class="o">.</span><span class="nf">presentation</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">myLayer</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">pres</span><span class="o">.</span><span class="n">position</span>   <span class="c1">// 현재 움직이던 좌표를 최종값으로 고정</span>
+  <span class="p">}</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="nf">removeAnimation</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"move"</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>애니메이션을 그룹화해서 동시 시작 및 종료 가능</p>
+
+    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 그룹 애니메이션 만들기</span>
+  <span class="k">let</span> <span class="nv">moveAnim</span> <span class="o">=</span> <span class="kt">CABasicAnimation</span><span class="p">(</span><span class="nv">keyPath</span><span class="p">:</span> <span class="s">"position"</span><span class="p">)</span>
+  <span class="n">moveAnim</span><span class="o">.</span><span class="n">fromValue</span> <span class="o">=</span> <span class="kt">NSValue</span><span class="p">(</span><span class="nv">cgPoint</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">120</span><span class="p">))</span>
+  <span class="n">moveAnim</span><span class="o">.</span><span class="n">toValue</span>   <span class="o">=</span> <span class="kt">NSValue</span><span class="p">(</span><span class="nv">cgPoint</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">400</span><span class="p">))</span>
+    
+  <span class="k">let</span> <span class="nv">fadeAnim</span> <span class="o">=</span> <span class="kt">CABasicAnimation</span><span class="p">(</span><span class="nv">keyPath</span><span class="p">:</span> <span class="s">"opacity"</span><span class="p">)</span>
+  <span class="n">fadeAnim</span><span class="o">.</span><span class="n">fromValue</span> <span class="o">=</span> <span class="mf">1.0</span>
+  <span class="n">fadeAnim</span><span class="o">.</span><span class="n">toValue</span>   <span class="o">=</span> <span class="mf">0.0</span>
+    
+  <span class="k">let</span> <span class="nv">group</span> <span class="o">=</span> <span class="kt">CAAnimationGroup</span><span class="p">()</span>
+  <span class="n">group</span><span class="o">.</span><span class="n">animations</span> <span class="o">=</span> <span class="p">[</span><span class="n">moveAnim</span><span class="p">,</span> <span class="n">fadeAnim</span><span class="p">]</span>
+  <span class="n">group</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">3.0</span>
+    
+  <span class="c1">// 실행</span>
+  <span class="n">myLayer</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"moveAndFade"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>애니메이션이 끝났는지 판단하는 방법 2가지
+    <ol>
+      <li>CATransaction의 completionBlock</li>
+      <li>CAAnimationDelegate 사용</li>
+    </ol>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[암시적, 명시적 애니메이션이 존재 layer.opacity = 0.0 → 자연스러운 페이드 아웃 CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능 팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음 CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것 만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨 배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함 숫자 (opacity, cornerRadius) → NSNumber 사각형 (frame, bounds) → NSValue(CGRect) 좌표 (position) → NSValue(CGPoint) 배열 또는 CGPath 색상 (borderColor) → CGColor 이미지 (contents) → CGImage 배열 Keyframe Animation Timing]]></summary></entry><entry><title type="html">Core Animation - Setting</title><link href="/jekyll-theme-yat/2025/09/01/core-animation-setting.html" rel="alternate" type="text/html" title="Core Animation - Setting" /><published>2025-09-01T01:01:00+00:00</published><updated>2025-09-01T01:01:00+00:00</updated><id>/jekyll-theme-yat/2025/09/01/core-animation-setting</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/01/core-animation-setting.html"><![CDATA[<ul>
+  <li><strong>Core Animation 지원 활성화 방법</strong>
+    <ul>
+      <li>iOS → 항상 활성화되어 있고, 모든 뷰가 기본적으로 레이어를 갖고 있음</li>
+      <li>macOS → 직접 활성화 필요
+        <ol>
+          <li><strong>QuartzCore</strong> 프레임워크 링크</li>
+          <li>NSView 객체 레이어 지원 켜기
+            <ol>
+              <li>가능하다면 윈도우의 <strong>content view</strong>에서 활성화하는 게 권장, setWantsLayer 호출</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>상황에 맞는 레이어 클래스 사용
+    <ul>
+      <li>보통 CALayer로 충분 허나 특정 목적에 맞게 최적화된 클래스 존재
+        <ol>
+          <li>큰 이미지
+            <ol>
+              <li>CATiledLayer : 큰 이미지를 조각 단위로 잘라 효율적으로 표시</li>
+            </ol>
+          </li>
+          <li>Metal, OpenGL ES로 직접 그리기
+            <ol>
+              <li>CAMetalLayer, CAEAGLLayer : GPU 렌더링을 위한 전용 레이어</li>
+            </ol>
+          </li>
+          <li>특수 효과
+            <ol>
+              <li>CAEmitterLayer: 입자 효과(파티클)</li>
+              <li>CAReplicatorLayer: 뷰/레이어 복제 효과</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>makeBackingLayer를 사용하여 원하는 레이어 클래스로 바꿈
+    <ul>
+      <li>혹은 Layer-hosting으로 새로운 레이어를 자신이 직접 붙여 모든 것을 관리</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="용도에-따른-레이어-클래스들">용도에 따른 레이어 클래스들</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">클래스</th>
+      <th style="text-align: left">용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">**CAEmitterLayer**</td>
+      <td style="text-align: left">Core Animation 기반 파티클(입자) 시스템 구현에 사용됩니다. 파티클 생성과 출발점을 제어합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAGradientLayer**</td>
+      <td style="text-align: left">레이어의 영역(둥근 모서리 포함)을 채우는 색상 그라데이션을 그릴 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAMetalLayer**</td>
+      <td style="text-align: left">Metal을 사용하여 레이어 콘텐츠를 렌더링할 텍스처를 설정하고 제공할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAEAGLLayer** / **CAOpenGLLayer**</td>
+      <td style="text-align: left">OpenGL ES(iOS) 또는 OpenGL(macOS)로 콘텐츠를 렌더링하기 위한 백업 저장소와 컨텍스트를 설정할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAReplicatorLayer**</td>
+      <td style="text-align: left">하나 이상의 서브레이어를 자동으로 복제할 때 사용됩니다. 지정한 속성을 이용해 복제본의 모양이나 속성을 변경할 수 있습니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAScrollLayer**</td>
+      <td style="text-align: left">여러 서브레이어로 구성된 큰 스크롤 가능한 영역을 관리할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CAShapeLayer**</td>
+      <td style="text-align: left">베지어 곡선을 이용해 경로(Path) 기반 도형을 그릴 때 사용됩니다. 항상 선명하게 스케일되므로 유리합니다. 다만, 이 과정은 메인 스레드에서 경로를 그린 뒤 캐싱하기 때문에 성능 주의가 필요합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CATextLayer**</td>
+      <td style="text-align: left">일반 문자열이나 속성 문자열(NSAttributedString)을 렌더링할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CATiledLayer**</td>
+      <td style="text-align: left">큰 이미지를 잘게 나누어(tile) 부분적으로 렌더링하고 확대/축소를 지원할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**CATransformLayer**</td>
+      <td style="text-align: left">다른 레이어 클래스들이 단순히 평면적으로(flat) 계층화되는 것과 달리, 실제 3D 레이어 계층 구조를 렌더링할 때 사용됩니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**QCCompositionLayer**</td>
+      <td style="text-align: left">Quartz Composer composition을 렌더링할 때 사용됩니다. (macOS 전용)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>macOS 레이어 이미지 관리 3가지 방법
+    <ul>
+      <li>이미지 객체를 contents 속성에 직접 할당
+        <ul>
+          <li>콘텐츠가 거의 변하지 않는 경우에 적합</li>
+        </ul>
+      </li>
+      <li>델리게이트(delegate) 객체를 레이어에 지정하고, 델리게이트가 레이어의 콘텐츠를 그림
+        <ul>
+          <li>콘텐츠가 주기적으로 바뀌거나, 뷰 같은 외부 객체에서 제공되는 경우 적합</li>
+        </ul>
+      </li>
+      <li>레이어 서브클래스를 정의하고, 그 안에서 그리기 메서드를 오버라이드하여 직접 콘텐츠 제공
+        <ul>
+          <li>(커스텀 레이어를 만들 필요가 있거나, 레이어의 근본적인 그리기 동작을 바꾸고 싶을 때 적합)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>뷰가 계속 바뀌는 상황에서는 델리게이트를 사용해야 하는데, 2가지 방법 존재
+    <ol>
+      <li><strong>displayLayer:</strong>
+        <ul>
+          <li>내가 직접 비트맵(이미지)을 만들고, layer.contents에 넣어줌</li>
+          <li>→ 즉, 레이어에 최종 그림을 “완성본”으로 넣어주는 방식</li>
+        </ul>
+      </li>
+      <li><strong>drawLayer:inContext:</strong>
+        <ul>
+          <li>Core Animation이 먼저 비트맵과 그래픽 컨텍스트를 준비해 줌</li>
+          <li>내 메서드는 그 컨텍스트 안에 그냥 “그림을 그리기만” 하면 됨</li>
+          <li>→ 즉, 그림을 “직접 그려 넣는 방식”</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>→ 만약 둘다 구현했다면 1번만 호출됨</p>
+  </li>
+  <li>이미지 배치 방법
+    <ol>
+      <li>위치 기반
+        <ul>
+          <li>나머지 부분은 다 짤림
+            <ul>
+              <li>정사각형 이미지를 TopLeft에 배치한다면, 키패드를 예시로 123, 456,78 부분은 다 짤림
+ <img src="/assets/images/coreanimation/core-2.png" alt="image.png" /></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>스케일링 기반
+ <img src="/assets/images/coreanimation/core-3.png" alt="image.png" /></li>
+    </ol>
+  </li>
+  <li>이미지에 대해서 픽셀이 아닌 비트맵을 저장하기 때문에 흐릴 수 있음
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">layer.contentsScale  = UIScreen.main.scale</code> 을 하면 스케일 정보를 저장하여 진하게 보여줌</li>
+    </ul>
+  </li>
+  <li>macOS에서는 코어 이미지에 Filter를 입힐 수 있음</li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[Core Animation 지원 활성화 방법 iOS → 항상 활성화되어 있고, 모든 뷰가 기본적으로 레이어를 갖고 있음 macOS → 직접 활성화 필요 QuartzCore 프레임워크 링크 NSView 객체 레이어 지원 켜기 가능하다면 윈도우의 content view에서 활성화하는 게 권장, setWantsLayer 호출 상황에 맞는 레이어 클래스 사용 보통 CALayer로 충분 허나 특정 목적에 맞게 최적화된 클래스 존재 큰 이미지 CATiledLayer : 큰 이미지를 조각 단위로 잘라 효율적으로 표시 Metal, OpenGL ES로 직접 그리기 CAMetalLayer, CAEAGLLayer : GPU 렌더링을 위한 전용 레이어 특수 효과 CAEmitterLayer: 입자 효과(파티클) CAReplicatorLayer: 뷰/레이어 복제 효과 makeBackingLayer를 사용하여 원하는 레이어 클래스로 바꿈 혹은 Layer-hosting으로 새로운 레이어를 자신이 직접 붙여 모든 것을 관리]]></summary></entry><entry><title type="html">Core Animation - Basic</title><link href="/jekyll-theme-yat/2025/09/01/core-animation-basic.html" rel="alternate" type="text/html" title="Core Animation - Basic" /><published>2025-09-01T01:00:00+00:00</published><updated>2025-09-01T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/09/01/core-animation-basic</id><content type="html" xml:base="/jekyll-theme-yat/2025/09/01/core-animation-basic.html"><![CDATA[<ul>
+  <li>Core Animation에서 CALayer는 핵심요소
+    <ul>
+      <li>레이어는 2D 평면이지만, 3D 공간위에 배치됨</li>
+      <li>뷰처럼 위치, 콘텐츠, 시각적 속성을 관리
+        <ul>
+          <li>허나 뷰와 달리 비트맵을 어덯게 보여줄지에 대한 상태 정보를 관리</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>→ 레이어는 뷰의 시각적 데이터를 담는 모델 객체이다.</p>
+
+<ul>
+  <li>대부분의 레이어는 앱 안에서 직접 그리지 않음
+    <ul>
+      <li>앱이 제공하는 콘텐츠를 <strong>비트맵으로</strong> 저장</li>
+    </ul>
+
+    <p>→ 뷰에서 화면 이동 애니메이션을 한다고 가정한다면, 실제 뷰는 좌표만 변경될뿐 다시 그리지 않고, 그동안 애니메이션에서 비트맵을 갖고 움직이는 뷰를 GPU를 통해 그린다</p>
+  </li>
+  <li>기존의 전통적인 뷰 기반 드로잉과 레이어 기반 드로잉의 차이점
+    <ul>
+      <li>기존 전통적인 뷰 기반은 뷰 자체를 말 그대로 다시 “draw” 함 → CPU의 사용량 증가</li>
+      <li>허나 레이어 기반은 뷰 자체는 가만히 있고, 그 뷰에 대한 비트맵 정보를 갖고 하기 때문에 GPU만 사용  → 허나 앱이 처음에 레이어에 들어갈 콘텐츠를 제공해야함 ( 추후에 다시 설명 )</li>
+    </ul>
+  </li>
+  <li>
+    <p>Core animation은 자동으로 애니메이션을 이어주는 엔진</p>
+
+    <p>→ 시작좌표가 0,0이고 끝 좌표가 100, 100이라면 자동으로 그 사이를 자연스럽게 연결해줌</p>
+  </li>
+  <li>레이어가 갖고 있는 정보
+    <ul>
+      <li>크기</li>
+      <li>위치</li>
+      <li>변환</li>
+      <li>기준점 ( 뷰에는 없는 고유한 속성 )
+        <ul>
+          <li>회전, 확대/축소가 일어날때 어느 점을 기준으로 변환할지</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>레이어는 두 가지 좌표계를 사용
+    <ul>
+      <li>포인트 좌표계, 화면이나 부모 레이어 좌표계와 직접 연결 ex ) CGPoint(x: 200, y: 300)
+        <ul>
+          <li>postion</li>
+          <li>bounds</li>
+          <li>frame 등이 주로 사용</li>
+        </ul>
+      </li>
+      <li>단위 좌표계, 비율로 표현 ex ) CGPoint(x: 0.5, y: 0.5)
+        <ul>
+          <li>anchorPoint가 주로 사용</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>iOS, macOS의 bounds 원점 (0, 0) 이 다름
+    <ul>
+      <li>iOS는 왼쪽 위</li>
+      <li>macOS는 왼쪽 아래</li>
+    </ul>
+  </li>
+  <li>모든 좌표값은 Float로 지정 → 더 정밀한 위치 지정을 하기 위해서</li>
+  <li>AnchorPoint는 해당 뷰에서 기준점이 어디인지 설정이고, Position은 상위 뷰에서 기준점을 어디에 둘지
+    <ul>
+      <li>A4 용지에서 포스트잇을 붙인 상황에서
+        <ul>
+          <li>기본 포스트잇의 AnchorPoint는 중심, 내가 포스트잇의 중심을 200,300에 뒀음</li>
+          <li>허나 여기서 포스트잇의 AnchorPoint를 왼쪽 위, 0,0에 배치한다면 똑같이 200,300에 중점을 배치해도 다른 뷰가 나옴 → 조심해야함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>레이어는 변환할 수 있는 두 개의 변환 행렬을 갖고 있음
+    <ul>
+      <li>transform → 이 안에 포함된 모든 서브 레이어에 적용</li>
+      <li>sublayerTransform → 부모 레이어에는 영향 없음, 자식 레이어들만 적용</li>
+    </ul>
+  </li>
+  <li>좌표값을 행렬 연산으로 바꿔 새로운 좌표를 만드는 방식으로 동작
+    <ul>
+      <li>3D 좌표계를 지원하기에 점 하나를 (x,y,z,w)로 표현</li>
+      <li>4 X 4행렬에 곱해서 변환된 좌표를 얻음</li>
+    </ul>
+
+    <p><img src="/assets/images/coreanimation/core-1.png" alt="image.png" /></p>
+
+    <p>→ 이 변환을 <strong>CATransform3D</strong> 구조체로 표현</p>
+  </li>
+  <li>Core Animation에서의 세 가지 상태 버전의 레이어 트리
+    <ol>
+      <li>모델 레이어 트리
+        <ul>
+          <li>시작 및 끝점 등의 애니메이션이 목표값을 저장</li>
+        </ul>
+      </li>
+      <li>프레젠테이션 트리
+        <ul>
+          <li>
+            <p>애니메이션이 진행 중일 때, <strong>중간 프레임들(지금 화면에 보이는 상태)</strong> 을 저장하는 트리</p>
+
+            <p>→ 말 그대로 <strong>현재 무대 위에 보여지는 장면</strong></p>
+          </li>
+        </ul>
+      </li>
+      <li>랜더 트리
+        <ul>
+          <li>Core Animation 내부 전용, GPU가 실제로 그림을 그리는 데 쓰는 레이어 트리</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<p>→ 하나의 뷰에 대해 트리가 존재</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>뷰 계층이 아래처럼 있다면
+
+WindowView
+ └─ ContentView
+      └─ ButtonView
+      
+이에 따른 레이어 또한 존재함
+-&gt; 뷰 자체가 레이어를 갖고 있고 모든 뷰는 UIView를 상속하기 때문에
+
+WindowLayer
+ └─ ContentLayer
+      └─ ButtonLayer
+      
+그럼 이 하나 하나의 레이어 ( WindowLayer, ContentLayer, ButtonLayer ) 마다 
+3가지 상태 버전이 존재 ( 위에서 설명한 것과 같이 )
+</code></pre></div></div>
+
+<p>→ <strong>레이어마다 모델/프레젠테이션/렌더 트리가 Core Animation 안에서 동시에 관리되면서 애니메이션이 실행된다.</strong></p>
+
+<ul>
+  <li><strong>Layer-backed View vs Layer-hosting View</strong>
+    <ul>
+      <li>iOS는 자동으로 레이어가 전부 붙지만 macOS는 붙지 않음</li>
+    </ul>
+
+    <p>→ macOS는 자신이 원하는 뷰에만 레이어를 붙여서 오버헤드를 줄일 수 있지만, 관리는 직접해야함
+     혹은 iOS 처럼 자동으로 붙여서 OS가 관리하도록 할 수 있다</p>
+  </li>
+  <li>주의점
+    <ul>
+      <li>
+        <p>최대한 뷰의 속성을 통해 수정할 수 있는 부분은 뷰를 통해 수정, 레이어를 건들여야 하는 것만 레이어로 수정</p>
+
+        <p>→ 동기화 문제가 발생한다면 꼬이거나 이상이 생길 수 있기 때문에</p>
+      </li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="swift" /><category term="core-animation" /><summary type="html"><![CDATA[Core Animation에서 CALayer는 핵심요소 레이어는 2D 평면이지만, 3D 공간위에 배치됨 뷰처럼 위치, 콘텐츠, 시각적 속성을 관리 허나 뷰와 달리 비트맵을 어덯게 보여줄지에 대한 상태 정보를 관리]]></summary></entry><entry><title type="html">인디앱을 위한 5가지 팁</title><link href="/jekyll-theme-yat/2025/08/21/five-tips-for-indie-apps.html" rel="alternate" type="text/html" title="인디앱을 위한 5가지 팁" /><published>2025-08-21T01:00:00+00:00</published><updated>2025-08-21T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/08/21/five-tips-for-indie-apps</id><content type="html" xml:base="/jekyll-theme-yat/2025/08/21/five-tips-for-indie-apps.html"><![CDATA[<p><strong>1. 텍스트는 짧고 크게</strong></p>
+<ul>
+  <li>7단어 이내</li>
+  <li>폰 화면에서 스크롤할 때 바로 읽혀야 함</li>
+  <li>작은 글씨, 대비 안 되는 색상 = 그냥 스킵당함</li>
+</ul>
+
+<p><strong>2. 배경 색상으로 차별화</strong></p>
+
+<p>경쟁 앱들이 주로 쓰는 색상.</p>
+<ul>
+  <li>ex)
+    <ul>
+      <li>금융 앱 → 파란색 계열</li>
+      <li>생산성 앱 → 흰색/회색 계열</li>
+    </ul>
+  </li>
+</ul>
+
+<p>-&gt; 보색이나 눈에 띄는 색상을 사용해서 차별화</p>
+
+<p><strong>3. 눈길 끄는 포인트(Artifact)</strong></p>
+<ul>
+  <li>한 장에 한 개만</li>
+  <li>특이한 색상/아이콘/그래픽 등</li>
+  <li>다른 사람에게 보여주고 “어디에 눈이 먼저 갔어?” 테스트하기</li>
+</ul>
+
+<p><strong>4. 이상하거나 호기심 유발하는 이미지</strong></p>
+<ul>
+  <li>유튜브 썸네일 같은 효과</li>
+  <li>“이게 뭐지?” 싶은 이미지 → 호기심 자극</li>
+  <li>너무 많으면 역효과, 한두 장만 포인트로 사용</li>
+</ul>
+
+<p><strong>5. 핵심 UI 확대</strong></p>
+<ul>
+  <li>중요한 기능/화면을 크게 확대</li>
+  <li>사람 눈은 큰 요소에 자동으로 끌림</li>
+  <li>전체 화면 확대 or 특정 UI 요소만 확대 가능</li>
+</ul>
+
+<hr />
+
+<h3 id="정리">정리</h3>
+<ul>
+  <li>글씨는 짧고 크게</li>
+  <li>배경 색상은 경쟁 앱과 반대로</li>
+  <li>눈길 끄는 포인트는 1개만</li>
+  <li>이상한/재밌는 이미지로 호기심 자극</li>
+  <li>핵심 UI는 크게 확대</li>
+</ul>
+
+<h3 id="출처">출처</h3>
+<p><a href="https://swiftdiscovery.substack.com/p/swift-discovery-indie-app-devs?triedRedirect=true&amp;utm_source=substack&amp;utm_medium=email">원문 사이트</a></p>]]></content><author><name>Hyunwook Lee</name></author><category term="Tip" /><category term="Indie-App" /><summary type="html"><![CDATA[1. 텍스트는 짧고 크게 7단어 이내 폰 화면에서 스크롤할 때 바로 읽혀야 함 작은 글씨, 대비 안 되는 색상 = 그냥 스킵당함]]></summary></entry><entry><title type="html">3 - 도메인 복잡성 관리</title><link href="/jekyll-theme-yat/2025/08/06/managing-domain-complexity.html" rel="alternate" type="text/html" title="3 - 도메인 복잡성 관리" /><published>2025-08-06T01:00:00+00:00</published><updated>2025-08-06T01:00:00+00:00</updated><id>/jekyll-theme-yat/2025/08/06/managing-domain-complexity</id><content type="html" xml:base="/jekyll-theme-yat/2025/08/06/managing-domain-complexity.html"><![CDATA[<h2 id="일관성-없는-모델">일관성 없는 모델</h2>
+
+<ul>
+  <li>
+    <p>텔레마케팅 회사 예시 → 마케팅 부서는 온라인 광고를 통해 리드 생성 후, 영업 부서는 구매를 유도함</p>
+
+    <p><img src="/assets/images/ddd/3-1.png" alt="3-1" /></p>
+
+    <ul>
+      <li>여기서 Lead란 무엇을 의미할까?
+        <ul>
+          <li>마케팅 부서 : 마케팅 담당자에게 리드는 누군가가 제품 중 하나에 관심이 있다는 알림을 나타냄, 잠재고객의 연락처 정보를 수신하는 이벤트는 리드로 간주</li>
+          <li>영업 부서 : 리드는 영업 프로세스의 전체 수명주기를 나타냄, 리드는 단순한 이벤트가 아닌 장기적으로 진행되는 과정</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>어떻게 해야 부서마다 다른 뜻을 하나의 유비쿼터스 언어로 일관성있도록 할 수 있을까?</p>
+
+    <p>→ 사람들간의 다른 용어는 이야기를 하면서 추론할 수 있음</p>
+  </li>
+  <li>
+    <p>허나 소프트웨어로 표현하는 것은 더 어려움</p>
+    <ul>
+      <li>각 부서에서 코드로 옮길 때 마케팅 부서는 너무 단순하고, 영업 부서는 너무 복잡하게 됨</li>
+    </ul>
+  </li>
+</ul>
+
+<p>→ 어떻게 해야할까?</p>
+
+<ul>
+  <li>ERD ( Entity Relationship Diagram ) 을 생성
+    <ul>
+      <li>단점 : 모든 세부사항을 추가하려다가 복잡성에 직면하게 됨</li>
+    </ul>
+  </li>
+  <li>문맥상 정의에 문제가 있는 용어 앞에 접두사를 추가하는 것 → 두 가지 모델을 만듬
+    <ul>
+      <li>문제점 1. 인지부하를 유발함 → 각 모델은 언제 사용해야할까?, 충돌하는 모델을 계속해서 구현할수록 실수하기 쉬움</li>
+      <li>문제점 2. 모델의 구현이 유비쿼터스 언어와 일치하지 않음. 아무도 대화 앞에 접두사를 사용하지 않음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="바운디드-컨텍스트란-무엇인가">바운디드 컨텍스트란 무엇인가?</h2>
+
+<ul>
+  <li>
+    <p>유비쿼터스 언어를 여러 개의 작은 언어로 나눈 다음 각 언어를 적용할 수 있는 명시적인 바운디드 컨텍스트에 할당</p>
+
+    <p><img src="/assets/images/ddd/3-2.png" alt="3-2" /></p>
+
+    <ul>
+      <li>어떤 의미에서 용어 충돌과 암시적 컨텍스트는 적당한 규모의 모든 비즈니스에 내재된 부분이다
+        <ul>
+          <li>바인디드 컨텍스트 패턴을 사용하면 컨텍스트를 명시적이고 중요한 비즈니스 도메인의 요소로 모델링할 수 있다</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="모델-경계">모델 경계</h3>
+
+<ul>
+  <li>모델은 실제 세계의 복사본이 아니라 복잡한 시스템을 이해하는데 도움을 주기 위해 구조화한 것
+    <ul>
+      <li>우리가 해결하려는 문제는 모델 본연의 목적</li>
+      <li>모델은 경계없이 존재할 수 없음</li>
+      <li>경계가 없다면 현실 세계의 복제본처럼 확장됨
+        <ul>
+          <li>ex) 노선도에서 운행이 쓸모 없음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="정제된-유비쿼터스-언어">정제된 유비쿼터스 언어</h3>
+
+<ul>
+  <li>비운디드 컨텍스트를 통해 유비쿼터스 언어의 정의를 완성할 수 있다.
+    <ul>
+      <li>조직 전체에서 유비쿼터스 하게 사용하고 적용돼야 한다는 의미에서 유비쿼터스가 아님</li>
+    </ul>
+  </li>
+  <li>유비쿼터스 언어는 바인디드 컨텍스트 경계 안에서만 보편적으로 적용된다
+    <ul>
+      <li>유비쿼터스 언어는 바운디드 컨텍스트 경계 안에서만 보편적으로 적용됨</li>
+      <li>모델을 설명하는 데만 집중</li>
+      <li>모델은 위가 해결해야 하는 문제없이는 존재할 수 없기 때문에 유비쿼터스 언어는 명시적으로 적용 가능한 컨텍스트 없이 정의하거나 사용할 수 없다</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="바운디드-컨텍스트의-범위">바운디드 컨텍스트의 범위</h3>
+
+<ul>
+  <li>서로 다른 도메인 전문가들은 동일한 비즈니스 엔티티에 대해 상충되는 멘탈 모델을 갖고 있었음</li>
+  <li>비즈니스 도메인을 모델링하기 위해 우리는 모델을 분할하고, 각 세분화된 모델에 적용 가능한 컨텍스트를 엄격하게 정의함</li>
+  <li>유비쿼터스 언어의 일관성은 해당 언어의 가장 넓은 경계를 식별하는 데 도움이 될 뿐이다
+    <ul>
+      <li>일관성이 없는 모델과 용어가 있기 때문에 더 이상 커질 수 없다</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/ddd/3-3.png" alt="3-3" /></p>
+
+<ul>
+  <li>유비쿼터스 언어의 범위를 정의하는 것은 전략적인 설계 의사결정
+    <ul>
+      <li>경계는 비즈니스 도메인의 고유한 컨텍스트에 따라 넓힐 수도 있고</li>
+      <li>비즈니스 도메인을 더 작은 문제 도메인으로 세분화하여 좁힐 수도 있음</li>
+    </ul>
+  </li>
+  <li>크기 자체는 의사결정 요소가 아님
+    <ul>
+      <li>크기에 정답은 없고, 모델 자체로 유용해야함</li>
+      <li>유비쿼터스 언어의 경계가 넓을수록 일관성을 유지하기 더 어려워짐</li>
+    </ul>
+  </li>
+  <li>큰 유비쿼터스 언어를 더 작고 관리하기 쉬운 문제 도메인으로 나눈 것은 도움이 될 수 있지만, 바운디드 컨텍스트를 작게 만들기 위해 노력하는 것은 역효과 날 수 있음 → 설계를 통합하는 오버헤드가 커짐
+    <ul>
+      <li>크기에 대한 결정은 문제 도메인이 무엇이냐에 따라 달라짐</li>
+      <li>떄로는 넓은 경계를 사용하는 것이 명확하고, 어떤 경우에는 분해하는 것이 더 합리적</li>
+    </ul>
+  </li>
+  <li>큰 바운디드 컨텍스트에서 세분화된 바운디드 컨텍스트를 추출하는 이유는 새로운 소프트웨어 엔지니어링 팀을 구성하거나 시스템의 일부 비기능 요구사항을 해결하는 것이 포함됨
+    <ul>
+      <li>ex) 단일 바운디드 컨텍스트에 있던 일부 컴포넌트의 개발 수명주기를 분리해야하는 경우</li>
+      <li>바운디드 컨텍스트의 나머지 기능과 독립적으로 확장할 수 있어서</li>
+    </ul>
+  </li>
+  <li>모델을 유용하게 유지하고 바운디드 컨텍스트의 크기를 비즈니스 요구사항과 조직의 제약사항에 맞춰라
+    <ul>
+      <li>
+        <p>주의할점 : 응집된 기능을 여러 바운디드 컨텍스트로 분할하는 것</p>
+
+        <p>→ 각 컨텍스트가 독립저긍로 발전하는 능력을 저해함 + 같은 비즈니스 요구사항과 변경사항은 바운디드 컨텍스트에 동시에 영향을 끼치고 변경에 대한 동시 배포가 요구됨</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="바운디드-컨텍스트-대-하위-도메인">바운디드 컨텍스트 대 하위 도메인</h2>
+
+<ul>
+  <li>처음에는 바운디드 도메인을 분해하는 두 가지 방법이 중복으로 보일 수 있다
+    <ul>
+      <li>하지만 그렇지 않다, 두 경계가 모두 필요한 이유를 살펴보자</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="하위-도메인">하위 도메인</h3>
+
+<ul>
+  <li>기업의 비즈니스 전략을 이해하려면 비즈니스 도메인을 분석해야함</li>
+  <li>
+    <p>도메인 주도 설계 방법론에 따르면 분석 단계에는 다양한 하위 도메인을 식별하는 작업이 포함됨</p>
+
+    <p>→ 조직이 일하고 경쟁 전략을 계획하는 방식</p>
+  </li>
+  <li>유스케이스는 비즈니스 도메인과 시스템 요구사항에 따라 정의됨
+    <ul>
+      <li>소프트웨어 엔지니어로서 우리는 요구사항을 정의하지 않음 → 비즈니스가 담당</li>
+      <li>대신 소프트웨어 엔지니어는 하위 도메인을 식별하기 위해 비즈니스 도메인을 분석</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="바운디드-컨텍스트">바운디드 컨텍스트</h3>
+
+<ul>
+  <li>반면에 바운디드 컨텍스트는 소프트웨어 엔지니어에 의해 설계됨</li>
+  <li>모델의 경계를 선택하는 것은 전략적 설계의 의사결정</li>
+  <li>우리는 비즈니스 도메인을 더 작고 관리 가능한 문제 도메인으로 어떻게 나눌지 정함</li>
+</ul>
+
+<h3 id="하위-도메인과-바운디드-컨텍스트-사이의-상호작용">하위 도메인과 바운디드 컨텍스트 사이의 상호작용</h3>
+
+<ul>
+  <li>비현실적이지만 이론적으로는 단일 모델이 전체 비즈니스 도메인에 적용될 수 있음
+    <ul>
+      <li>
+        <p>이 전략은 소규모 시스템에서 효과적</p>
+
+        <p><img src="/assets/images/ddd/3-4.png" alt="3-4" /></p>
+      </li>
+      <li>
+        <p>모델이 충돌하면 도메인 전문가의 멘탈 모델에 따라 시스템을 바운디드 컨텍스트로 분해 가능</p>
+
+        <p><img src="/assets/images/ddd/3-5.png" alt="3-5" /></p>
+      </li>
+      <li>
+        <p>모델이 여전히 크고 유지보수하기 어려운 경우 더 작은 바운디드 컨텍스트로 분해 가능</p>
+        <ul>
+          <li>ex) 각 하위 도메인에 대한 바운디드 컨텍스트로 나눌 수 있음</li>
+        </ul>
+
+        <p><img src="/assets/images/ddd/3-6.png" alt="3-6" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>어떤 시나리오에서 바운디드 컨텍스트와 하위 도메인 간에 일대일 관계를 맺는 것이 완벽하게 합리적일때가 많다
+    <ul>
+      <li>반면 어떤 경우에는 다른 분해 전략이 더 적합할 수 있음</li>
+    </ul>
+  </li>
+  <li>중요한 것은 하위 도메인은 발견하고 바운디드 컨텍스트는 설계한다는 점
+    <ul>
+      <li>하위 도메인은 비즈니스 전략에 의해 정의됨</li>
+      <li>그러나 소프트웨어 엔지니어는 특정 프로젝트의 컨텍스트와 제약 조건을 해결하기 위해 소프트웨어 솔루션과 바운디드 컨텍스트를 설계할 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="경계">경계</h2>
+
+<blockquote>
+  <p>건축 설계는 시스템 설계다. 시스템 설계는 상황에 맞는 설계다. 본질적으로 경계와 균형에 관한 것이다. 내부의 모양을 구성하는 것처럼 외부의 모양도 재구성한다 - 루스 말란</p>
+
+</blockquote>
+
+<ul>
+  <li>바운디드 컨텍스트 패턴은 물리적 경계와 소유권 경계를 규정하기 위한 도메인 주도 설계 도구다</li>
+</ul>
+
+<h3 id="물리적-경계">물리적 경계</h3>
+
+<ul>
+  <li>바운디드 컨텍스트는 모델 경계뿐만 아니라 이를 구현하는 시스템의 물리적 경계 역할도 함</li>
+  <li>각 바운디드 컨텍스트는 개별 서비스/프로젝트로 구현돼야 한다
+    <ul>
+      <li>구현, 진화, 버전 관리를 각각의 다른 바운디드 컨텍스트와 독립적으로 해야함</li>
+    </ul>
+  </li>
+  <li>바운디드 컨텍스트 간의 명확한 물리적 경계를 통해 각 바운디드 컨텍스트를 요구사항에 가장 적합한 기술 스택으로 구현할 수 있음
+    <ul>
+      <li>바운디드 컨텍스트는 여러 하위 도메인을 포함할 수 있음</li>
+      <li>이러한 경우 바운디드 컨텍스트는 물리적 경계고 하위 도메인은 논리적 경계</li>
+      <li>논리적 경계는 프로그래밍 언어의 종류에 따라 네임스페이스나 모듈, 패키지 같은 다른 이름을 갖음</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="소유권-경계">소유권 경계</h3>
+
+<ul>
+  <li>좋은 담장은 실제로 좋은 이웃을 만든다는 연구처럼, 이웃과 잘 지내기 위해서는 서로 간에 독립성과 존중을 유지하는 것이 필요
+    <ul>
+      <li>프로젝트에서도 팀 간의 평화로운 공존을 위해 모델 경계를 활용할 수 있음</li>
+      <li>팀 간의 작업 분배는 바운디드 컨텍스트 패턴을 사용하여 내릴 수 있는 또 다른 전략적 의사결정</li>
+    </ul>
+  </li>
+  <li>바운디드 컨텍스트는 한팀에서만 구현, 발전, 유지 관리해야함
+    <ul>
+      <li>두 팀에서 작업 X</li>
+      <li>이러한 분리는 팀이 서로의 모델에 대해 만들 수 있는 암묵적인 가정을 제거</li>
+      <li>
+        <p>대신 팀은 서로 다른 바운디드 컨텍스트로 분리된 모델과 시스템을 명시적으로 연동하기 위한 통신 프로토콜을 정의해야함</p>
+
+        <p>→ 팀과 바운디드 컨텍스트 간의 관계는 단방향</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/ddd/3-7.png" alt="3-7" /></p>
+
+<h2 id="실생활의-바운디드-컨텍스트">실생활의 바운디드 컨텍스트</h2>
+
+<ul>
+  <li>실제로 바운디드 컨텍스트는 비즈니스 도메인과 하위 도메인 만큼 분명하지는 않지만, 도메인 전문가의 멘탈 모델이 잇는 것처럼 존재함
+    <ul>
+      <li>엔지니어는 도메인 전문가가 다양한 비즈니스 엔티티와 프로세스에 대해 어떻게 생각하는지 의식해야함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="시멘틱-도메인">시멘틱 도메인</h3>
+
+<ul>
+  <li>DDD의 바운디드 컨텍스트는 시맨틱 도메인의 사전적 개념에 기반한다고 볼 수 있음
+    <ul>
+      <li>시맨틱 도메인 : 특정 주제나 분야 대한 지식과 정보를 체계적으로 구조화하고 표현하는 것을 의미</li>
+      <li>의미 영역과 해당 의미를 전달하기 위해 사용하는 단어 영역으로 구분
+        <ul>
+          <li>모니터</li>
+          <li>포트</li>
+          <li>프로세서</li>
+        </ul>
+      </li>
+      <li>서로 다른 시맨틱 도메인의 다소 특이한 예는 토마토
+        <ul>
+          <li>식물학적 정의에 따르면 과일은 식물이 씨앗을 퍼뜨는 방식</li>
+          <li>과일은 식물의 꽃에서 자라야 하고 적어도 하나의 씨가 있어야 한다</li>
+          <li>
+            <p>반면 채소는 식물의 식용 가능한 모든 부분인 뿌리, 줄기, 잎을 포괄하는 일반 용어</p>
+
+            <p>→ 이 정의에 따르면 토마토는 과일이다</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>그러나 그 정의는 요리의 맥락에서 거의 사용되지 않음
+    <ul>
+      <li>요리의 맥락에서 과일과 채소는 향미 프로필에 따라 정의됨</li>
+      <li>
+        <p>과일은 식감이 부드럽고 단맛이나 신맛이 나며 생으로 있는 반면 채소는 식감이 더 질기고 맛이 떫으며 종종 요리해서 먹어야 함</p>
+
+        <p>→ 이 정의에 따르면 토마토는 채소</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>→ 바운디드 컨텍스트에 따라서 토마토는 달라짐</p>
+
+<h3 id="과학">과학</h3>
+
+<blockquote>
+  <p>과학자들은 일반적으로 어떤 이론도 100% 정확하지 않다는데 동의한다. 그러므로 지식의 진정한 시험은 진리가 아니라 효용이다 - 유발 노아 하라리</p>
+
+</blockquote>
+
+<p>→ 모든 경우에 맞는 과학적 이론은 없다. 다른 이론은 다른 맥락 안에서 유용하다</p>
+
+<ul>
+  <li>아이작 뉴턴과 아인슈타인이 도입한 서로 다른 중력 모델로 입증됨
+    <ul>
+      <li>주장이 달라 모순되는 것처럼 보일 수 있지만, 적절한 바운디드 컨텍스트에서는 유용함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="냉장고-구입">냉장고 구입</h3>
+
+<ul>
+  <li><strong>골판지 판은 단순한 부품이 아니라 도메인 모델이다.</strong>
+    <ul>
+      <li>예: 냉장고 입구에 깔린 골판지는 냉장고가 부엌에 들어갈 수 있는지 측정하는 문제를 해결하는 모델임.</li>
+      <li>이는 “모델은 문제를 해결하기 위해 존재한다”는 DDD(도메인 주도 설계) 철학을 보여줌.</li>
+    </ul>
+  </li>
+  <li><strong>하나의 도메인에 대해 여러 모델이 가능하며, 작업 목적에 따라 다른 모델이 필요하다.</strong>
+    <ul>
+      <li>같은 냉장고에 대해, 측정 기준이 다르면 서로 다른 모델(3D 모델, 골판지 판 등)을 사용할 수 있음.</li>
+      <li>모델은 해당 작업에 불필요한 정보는 생략되어야 하며, 과도하게 복잡할 필요 없음.</li>
+    </ul>
+  </li>
+  <li><strong>모델이란 유용한 추상화일 뿐이며, 정확한 복제는 목표가 아니다.</strong>
+    <ul>
+      <li>냉장고와 관련된 AR 애플리케이션 사례에서도, 목적이 “들어갈 수 있는지 확인하는 것”이라면 간단한 골판지 모델이면 충분함.</li>
+    </ul>
+  </li>
+  <li><strong>결론:</strong>
+    <ul>
+      <li>도메인마다 <strong>바운디드 컨텍스트</strong>를 분리하고, 각 컨텍스트마다 적절한 <strong>유비쿼터스 언어</strong>와 모델을 설계해야 한다.</li>
+      <li>모델 간의 의미 충돌이 있다면 도메인을 나누고 명확히 경계를 정의해야 함.</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Hyunwook Lee</name></author><category term="DDD" /><category term="Domain-Driven-Develop" /><summary type="html"><![CDATA[일관성 없는 모델]]></summary></entry></feed>

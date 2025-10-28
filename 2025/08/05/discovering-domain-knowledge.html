@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>2 - 도메인 지식 찾아내기 | Avoid Nil</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="2 - 도메인 지식 찾아내기">
+<meta name="author" content="Hyunwook Lee">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="운영환경에 배포되는 것은 도메인 전문가의 지식이 아니라 개발자의 이해 혹은 오해다 - 알베르토 브랜돌리니">
+<meta property="og:description" content="운영환경에 배포되는 것은 도메인 전문가의 지식이 아니라 개발자의 이해 혹은 오해다 - 알베르토 브랜돌리니">
+<link rel="canonical" href="/jekyll-theme-yat/2025/08/05/discovering-domain-knowledge.html">
+<meta property="og:url" content="/jekyll-theme-yat/2025/08/05/discovering-domain-knowledge.html">
+<meta property="og:site_name" content="Avoid Nil">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2025-08-05T01:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="2 - 도메인 지식 찾아내기">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-08-05T01:00:00+00:00","datePublished":"2025-08-05T01:00:00+00:00","description":"운영환경에 배포되는 것은 도메인 전문가의 지식이 아니라 개발자의 이해 혹은 오해다 - 알베르토 브랜돌리니","headline":"2 - 도메인 지식 찾아내기","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/2025/08/05/discovering-domain-knowledge.html"},"url":"/jekyll-theme-yat/2025/08/05/discovering-domain-knowledge.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/jekyll-theme-yat/assets/images/favicon/favicon.png" type="image/png">
+  <link rel="canonical" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Avoid Nil">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Avoid Nil" src="" onerror="this.style.display='none'">
+  Avoid Nil
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<div class="page-link" style="display: inline;">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<div class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</div>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <span class="icon sun">☀️</span>
+    <span class="icon moon">🌙</span>
+    <div class="toggle"></div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+        document.dispatchEvent(new Event('theme-changed'));
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">2 - 도메인 지식 찾아내기</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2025-08-05T01:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 05, 2025
+    </time>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#DDD">#DDD</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Domain-Driven-Develop">#Domain-Driven-Develop</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <blockquote>
+  <p>운영환경에 배포되는 것은 도메인 전문가의 지식이 아니라 개발자의 이해 혹은 오해다 - 알베르토 브랜돌리니</p>
+
+</blockquote>
+
+<h2 id="비즈니스-문제">비즈니스 문제</h2>
+
+<ul>
+  <li>우리가 개발하는 소프트웨어 → 비즈니스 문제의 솔루션
+    <ul>
+      <li>여기서 문제는 수학 문제나 수수께끼 X</li>
+      <li>비즈니스 도메인의 컨텍스트에서 문제의 의미는 광범위
+        <ul>
+          <li>워크플로우와 프로세스 최적화</li>
+          <li>수작업 최적화</li>
+          <li>자원 관리</li>
+          <li>의사결정 지원</li>
+          <li>데이터 관리 등</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>비즈니스 문제는 비즈니스 도메인과 하위 도메인의 모든 수준에서 발생할 수 있다
+    <ul>
+      <li>기업의 목표는 고객의 문제를 해결하는 솔루션을 제공하는 것</li>
+      <li>하위 도메인 → 세분화된 문제 도메인, 비즈니스 기능에 대한 솔루션을 제공하는 것이 목적
+        <ul>
+          <li>지식 관리 하위 도메인 → 정보를 저장 및 추출하는 프로세스</li>
+          <li>어음 교환 하위 도메인 → 재무 거래 실행 프로세스 최적화 솔루션</li>
+          <li>회계 하위 도메인 → 기업의 자금을 관리하는 솔루션</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="도메인-지식-찾아내기">도메인 지식 찾아내기</h2>
+
+<ul>
+  <li>효과적인 소프트웨어 솔루션을 설계한다면 적어도 기본적인 비즈니스 도메인 지식이 있어야 함
+    <ul>
+      <li>허나 이건 도메인 전문가의 몫, 우리는 될 필요도 없고, 될 수도 없음 → 비즈니스 용어만이라도 이해해보자</li>
+    </ul>
+  </li>
+  <li>효과적인 소프트웨어는 도메인 전문가가 문제를 생각하는 방식 → <strong>멘탈 모델</strong>을 모방해야함
+    <ul>
+      <li>
+        <p>비즈니스 문제와 요구사항 이면에 있는 “이유에 대한 이해”가 없다면 그냥 소스코드로 요구사항을 번역한 것에 불과함</p>
+
+        <p>→ 만약 여기서 중요한 ‘극단적인 경우’를 놓친다면? or 비즈니스 개념을 설명하지 못해 미래의 요구사항을 충족할 모델을 구현할 역량이 제한된다면?</p>
+      </li>
+    </ul>
+  </li>
+  <li>알베르토 브랜돌리니는 소프트웨어 개발은 배우는 과정, 작동하는 코드는 그 부산물
+    <ul>
+      <li>소프트웨어 프로젝트의 성공은 도메인 전문가와 개발자간의 효과적인 지식공유에 달렸다</li>
+    </ul>
+  </li>
+  <li>지식공유를 위한 효과적인 <strong>커뮤니케이션이</strong> 필요하다</li>
+</ul>
+
+<h2 id="커뮤니케이션">커뮤니케이션</h2>
+
+<ul>
+  <li>거의 모든 소프트웨어 프로젝트는 다양한 역할의 이해관계자의 협업이 필요
+    <ul>
+      <li>결과는 이 모든 참가자들이 얼마나 잘 협력할 수 있냐에 달려있다
+        <ul>
+          <li>해결하려는 문제에 대하여 모든 이해관계자가 동의하고 있는가?</li>
+          <li>개발하고 있는 솔루션의 기능 또는 비기능 요구사항 중에 서로 충돌하는 가정이 있지 않은가?</li>
+        </ul>
+
+        <p>→ 프로젝트와 연관된 모든 것에 대한 합의와 일치는 프로젝트의 성공에 필수다</p>
+      </li>
+    </ul>
+  </li>
+  <li>프로젝트가 실패하는 이유에 대한 연구에서 효과적인 커뮤니케이션이 지식 공유와 프로젝트 성공에 필수라는 것을 밝혀냄
+    <ul>
+      <li>이렇게 중요하지만 실제로 목격하기에는 어렵다</li>
+      <li>
+        <p>일반적인 지식 공유 흐름</p>
+
+        <p><img src="/assets/images/ddd/2-1.png" alt="2-1"></p>
+      </li>
+    </ul>
+  </li>
+  <li>전형적인 소프트웨어 개발 생애주기에서 도메인 지식은 <strong>분석 모델</strong>로 알려진 엔지니어 친화적인 형태로 변환됨
+    <ul>
+      <li>예시를 들어보자면, 결론적으로 도메인 개발자에게 들은 요구 사항에 대해서 개발을 진행해야 하고, 이 개발은 개발자들끼리 진행하기에, 자신들이 사용할 때 편한 단어와 워드로 표현을 진행</li>
+    </ul>
+
+    <p>→ 많은 양의 정보가 사라지고 손실되면서, 추후에는 최신 정보까지 담아내지 못하는 문제가 발생</p>
+
+    <ul>
+      <li>도메인 지식을 코드로 구현하는 데 필요한 다양한 변환을 보여준다</li>
+    </ul>
+
+    <p><img src="/assets/images/ddd/2-2.png" alt="2-2"></p>
+
+    <ul>
+      <li>이런 정보는 개발자가 잘못된 솔루션을 구현하게 하거나 솔루션이 올바르다 해도 해결하려는 문제가 잘못된 경우로 이어짐 → 프로젝트 실패</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="유비쿼터스-언어란-무엇인가">유비쿼터스 언어란 무엇인가?</h2>
+
+<ul>
+  <li>유비쿼터스 언어의 사용은 도메인 주도 설계의 초석
+    <ul>
+      <li>참가자들이 효과적으로 소통하기 위해 변환에 의존하지 말고 같은 언어를 사용하는 것</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>우리가 말하는 상식은 실제로 일반적이지 않다 - 볼테르</p>
+
+</blockquote>
+
+<ul>
+  <li>전통적인 소프트웨어 개발 생애주기에서 변환이 어떻게 일어나는지 정리
+    <ul>
+      <li>도메인 지식 → 분석 모델</li>
+      <li>분석 모델 → 요구사항</li>
+      <li>요구사항 → 시스템 설계</li>
+      <li>시스템 설계 → 소스코드</li>
+    </ul>
+  </li>
+  <li>도메인 지식을 계속해서 변환하는 대신 비즈니스 도메인을 설명하기 위한 단일화된 언어 체계 → 유비쿼터스</li>
+  <li>개발자, 제품 소유자, 도메인 전문가, UI/UX 디자이너와 같은 프로젝트 이해관계자는 유비쿼터스 언어를 사용
+    <ul>
+      <li>이 언어를 사용함으로써 비즈니스 도메인을 추론하는데 <strong>편안함을 느껴야</strong> 한다는 점이 중요</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="비즈니스-언어">비즈니스 언어</h2>
+
+<ul>
+  <li>비즈니스 언어이기에, 기술 용어는 빼고 비즈니스 도메인에 관련된 용어로만 구성
+    <ul>
+      <li>도메인 전문가의 이해와 비즈니스 도메인에 대한 <strong>멘탈 모델을 쉽게 이해</strong>할 수 있는 관점으로 표현하는 것을 목표로 함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="시나리오">시나리오</h3>
+
+<ul>
+  <li>다음과 같은 문장들을 읽어보자
+    <ul>
+      <li>광고 캠페인은 다양한 창의적인 자료를 전시할 수 있다.</li>
+      <li>캠페인은 최소한 하나의 광고 할당이 활성화되어야 게시된다.</li>
+      <li>판매 커미션은 거래가 승인된 후에 회계 처리된다.</li>
+    </ul>
+  </li>
+  <li>유비쿼터스 언어가 아닌 문장
+    <ul>
+      <li>광고의 아이프레임(iframe)은 HTML 파일을 표시한다.</li>
+      <li>캠페인은 ‘활성-할당(active-placement)’ 테이블에 하나의 연관 레코드가 있어야 게시된다.</li>
+      <li>판매 커미션은 거래(transaction) 테이블과 판매-승인(approved-sales) 테이블의 연관 레코드에 근거하여 처리된다.</li>
+    </ul>
+  </li>
+  <li>도메인 전문가도 문장을 읽기 어렵고, 개발자도 요구사항을 이해하지 못해 개판될 가능성 UP!</li>
+</ul>
+
+<h3 id="일관성">일관성</h3>
+
+<ul>
+  <li>유비쿼터스 언어는 반드시 정확하고 일관성 있어야 함</li>
+  <li>가정할 필요가 없어야 하고 비즈니스 도메인의 로직을 명료하게 표현해야 한다.</li>
+  <li>모호성이 커뮤니케이션을 방해하기 때문에 언어의 용어는 오직 하나의 의미를 가져야 한다.
+    <ul>
+      <li>불분명한 용어의 몇 가지 예와 개선 방법을 살펴보자</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="모호한-용어">모호한 용어</h3>
+
+<ul>
+  <li>어던 비즈니스 도메인에서는 <strong>정책(Policy)</strong> 이라는 용어가 규제, 규칙 또는 보험 계약과 같은 여러 의미를 내포
+    <ul>
+      <li>정확한 의미는 맥락에 따라 사람 간의 상호작용을 통해서만 알 수 있다</li>
+      <li>허나 소프트웨어는 모호성에 잘 대처하지 못하며, “정책” 이라는 개체를 코드로 모델링하기가 어려울 수 있음</li>
+    </ul>
+  </li>
+  <li>유비쿼터스 언어는 용어마다 단일 의미를 갖게 하기 때문에 “정책”의 경우 ‘<strong>규제 규칙(regulartory rule)’ ‘보험 계약(insurance contract)’</strong>의 두 용어를 사용하여 명확한 모델을 만들어야 함</li>
+</ul>
+
+<h3 id="동의어">동의어</h3>
+
+<ul>
+  <li>유비쿼터스 언어에서 두 용어는 서로 바꿔 사용할 수 없다.
+    <ul>
+      <li>사용자는 다양한 곳에서 사용하지만, 도메인 전문가에게는 사용자, 방문자, 관리자, 계정 등의 다른 용어가 혼용된다는 것을 발견할 수 있음</li>
+      <li>당연히 처음에는 괜찮지만 개념이 많이 쌓이는 순간 잘못된 이해가 생기기 시작한다</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="비즈니스-도메인-모델">비즈니스 도메인 모델</h2>
+
+<h3 id="모델이란-무엇인가">모델이란 무엇인가?</h3>
+
+<blockquote>
+  <p>모델이란 사물이나 현상에서 의도한 관점만 강조하고 다른 측면은 무시하여 간략히 표현한 것이다. 즉, 특정 용도를 마음에 둔 추상화의 결과다 - 레베카 워프스-브룩</p>
+
+</blockquote>
+
+<ul>
+  <li>모델은 실셰계의 복제가 아니라 우리가 실제 시스템을 이해하는 데 도움을 주는 인간의 창조물
+    <ul>
+      <li>
+        <p>잘 설명하는 예시로는 지도</p>
+
+        <p><img src="/assets/images/ddd/2-3.png" alt="2-3"></p>
+      </li>
+      <li>
+        <p>새부적인 모든 것을 나태내지 않고, 특정 목적을 지원하는 데 충분한 자료만 담고 있음 → 특정 목적이 지도가 풀고자 하는 문제</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="효과적인-모델링">효과적인 모델링</h3>
+
+<ul>
+  <li>모든 모델에는 목적이 있고 효과적인 모델은 그 목적을 달성하는 데 필요한 세부사항만 포함한다
+    <ul>
+      <li>세계지도 → 지하철 정거장 정보 X</li>
+      <li>지하철 노선도 → 거리 측정 X</li>
+    </ul>
+
+    <p>→ 각 지도는 제공해야 할 정보만 포함</p>
+  </li>
+  <li>유용한 모델은 실세계의 복사본이 아니라 문제를 해결하려는 의도가 있으며 그 목적에 필요한 정보만 제공해야 함</li>
+</ul>
+
+<blockquote>
+  <p>모든 모델은 문제가 있지만, 일부는 유용하다 - 조지 박스</p>
+
+</blockquote>
+
+<ul>
+  <li>모델은 본질적으로 추상화의 결과
+    <ul>
+      <li>불필요한 상세 정보 생략하여 복잡한 문제 다룰수 있도록, 문제에 필요한 정보만 남김</li>
+      <li>
+        <p>그렇지 않다면 필요한 정보를 날리거나, 잡음을 유발함</p>
+
+        <p>→ 추상화의 목적은 모호함이 아니라 절대적으로 정확할 수 있는 새로운 의미론적 수준을 만드는 것</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="비즈니스-도메인-모델링">비즈니스 도메인 모델링</h3>
+
+<ul>
+  <li>유비쿼터스 언어를 발전시키는 것은 사실상 비즈니스 도메인 모델을 구축하는 셈</li>
+  <li>모델은 비즈니스가 기능을 어떻게 구현하느냐에 대한 도메인 전문가의 사고 프로세스인 멘탈 모델을 포착해야함
+    <ul>
+      <li>모델은 관련된 비즈니스 엔티티와 그것의 행동, 인과 관계, 불변성 등을 반영해야 한다.</li>
+    </ul>
+  </li>
+  <li>유비쿼터스 언어는 모든 가능한 상세 정보를 포함하는 것이 아닌, 소프트웨어가 해결하고자 하는 특정 문제를 해결하는 데 필요한 만큼의 비즈니스 도메인 관점을 포함하면ㄷ ㅚㅁ</li>
+  <li>엔지니어링 팀과 도메인 전문가의 효과적인 커뮤니케이션은 필수
+    <ul>
+      <li>비즈니스 도메인이 복잡할 수록 커뮤니케이션의 중요성 커짐</li>
+      <li>복잡할 수록 모델링하고 코드로 구현하기 어려움</li>
+      <li>이해했는지 확인할 신뢰성 있는 유일한 방법은 도메인 전문가가 이해할 수 있는 언어로 대화하는 것</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="지속적인-노력">지속적인 노력</h3>
+
+<ul>
+  <li>유비쿼터스 언어를 정형화하려면 도메인 전문가와의 상호작용이 필요
+    <ul>
+      <li>상호작용만이 비즈니스 도메인에 대한 잘못된 가정, 부정확함, 전체적인 이해 오류를 발견할 수 있음</li>
+    </ul>
+  </li>
+  <li>모든 이해관계자는 모든 프로젝트와 관련된 커뮤니케이션에 유비쿼터스 언어를 지속적으로 사용해서 지식 공유를 확산하고 비즈니스 도메인에 대한 공유된 이해를 강화해야함
+    <ul>
+      <li>요구사항</li>
+      <li>테스트</li>
+      <li>문서화</li>
+      <li>소스코드 자체에서 유비쿼터스 언어 사용</li>
+    </ul>
+  </li>
+  <li>지속해서 검증하고 발전ㄴ시켜야 함</li>
+  <li>그러다보면 비즈니스 도메인에 대한 통찰을 얻을 것이다
+    <ul>
+      <li>이 때 또 다시 유비쿼터스 언어 또한 발전해야 함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="도구">도구</h3>
+
+<ul>
+  <li>유비쿼터스 언어를 수집하고 관리하는 과정을 돕는 도구와 기술
+    <ul>
+      <li>위키 → 용어집 : 비즈니스 도메인의 용어에 대한 정보를 얻을 수 있는 거점 역할
+        <ul>
+          <li>새로운 팀원이 쉽게 적응하게 해줌</li>
+          <li>뿐만 아니라 다 함께 유지보수하는 것이 중요함</li>
+          <li>모든 팀원이 수정할 수 있게 독려해야함</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>명사가 중요하긴 하지만 행동을 포착하는 것이 중요
+    <ul>
+      <li>행동은 단순히 명사와 관련된 동사의 목록이 아닌 규칙, 가정, 그리고 불변성을 가진 실제 비즈니스 로직 → 문서화하기 훨씬 어려움</li>
+      <li>그러므로 용어집은 유스케이스 또는 거킨 테스트처럼 행동을 포착하는데 적합한 다른 도구와 함계 사용하는 것이 가장 좋다</li>
+    </ul>
+  </li>
+  <li>
+    <p>거킨 언어로 작성된 자동화 테스트는 유비쿼터스 언어를 포착하기에 좋은 언어일 뿐 아니라 도메인 전문가와 개발자의 간극을 메우는 보조 도구 역할 할 수 있음</p>
+
+    <p><img src="/assets/images/ddd/2-4.png" alt="2-4"></p>
+  </li>
+</ul>
+
+<h3 id="도전과제">도전과제</h3>
+
+<ul>
+  <li>유비쿼터스 언어를 발전시키는 거 보기보다 어렵다
+    <ul>
+      <li>대부분의 가장 중요한 지식은 도메인 전문가의 암묵지 → 질문하는 방법밖에는 알 수 있는 방법이 없음</li>
+      <li>이 기법에 경험이 쌓이면 단순히 존재하는 지식을 발견하는 것 뿐만 아니라 도메인 전문가와 협력해서 모델을 함계 만들어가는 것이 자주 포함된다는 사실을 알게됨</li>
+      <li>질문을 통해서 종종 숨어있던 충돌과 공백을 찾아내 명확하게 할 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/2025/08/04/analyzing-the-business-domain.html" title="1 - 비즈니스 도메인 분석하기">
+          <div>1 - 비즈니스 도메인 분석하기</div>
+        </a><a class="next" href="/jekyll-theme-yat/2025/08/06/managing-domain-complexity.html" title="3 - 도메인 복잡성 관리">
+          <div>3 - 도메인 복잡성 관리</div>
+        </a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/09/01/core-animation-build-animation.html" title="Core Animation - Build Animation">
+            Core Animation - Build Animation<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/09/05/after-kwdc25.html" title="KWDC25 후기">
+            KWDC25 후기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/08/21/five-tips-for-indie-apps.html" title="인디앱을 위한 5가지 팁">
+            인디앱을 위한 5가지 팁<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/09/02/core-animation-advanced-animation-tricks.html" title="Core Animation - Advanced Animation Tricks">
+            Core Animation - Advanced Animation Tricks<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Copyright <span class="copyleft">©</span> 2024-2025 Hyunwook Lee All rights reserved.</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
