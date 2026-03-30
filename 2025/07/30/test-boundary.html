@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>28장 - 테스트 경계 | Avoid Nil</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="28장 - 테스트 경계">
+<meta name="author" content="Hyunwook Lee">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="테스트는 시스템의 일부, 아키텍쳐에도 관여함 시스템의 나머지 요소가 아키텍쳐에 관여하는 것과 동등하게 어떤 면에서는 정말 평범하게 관여함 또 다른 면에서는 상당히 독특하게 관여함">
+<meta property="og:description" content="테스트는 시스템의 일부, 아키텍쳐에도 관여함 시스템의 나머지 요소가 아키텍쳐에 관여하는 것과 동등하게 어떤 면에서는 정말 평범하게 관여함 또 다른 면에서는 상당히 독특하게 관여함">
+<link rel="canonical" href="/jekyll-theme-yat/2025/07/30/test-boundary.html">
+<meta property="og:url" content="/jekyll-theme-yat/2025/07/30/test-boundary.html">
+<meta property="og:site_name" content="Avoid Nil">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2025-07-30T01:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="28장 - 테스트 경계">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-07-30T01:00:00+00:00","datePublished":"2025-07-30T01:00:00+00:00","description":"테스트는 시스템의 일부, 아키텍쳐에도 관여함 시스템의 나머지 요소가 아키텍쳐에 관여하는 것과 동등하게 어떤 면에서는 정말 평범하게 관여함 또 다른 면에서는 상당히 독특하게 관여함","headline":"28장 - 테스트 경계","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/2025/07/30/test-boundary.html"},"url":"/jekyll-theme-yat/2025/07/30/test-boundary.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/jekyll-theme-yat/assets/images/favicon/favicon.png" type="image/png">
+  <link rel="canonical" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Avoid Nil">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Avoid Nil" src="" onerror="this.style.display='none'">
+  Avoid Nil
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<div class="page-link" style="display: inline;">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<div class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</div>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <span class="icon sun">☀️</span>
+    <span class="icon moon">🌙</span>
+    <div class="toggle"></div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+        document.dispatchEvent(new Event('theme-changed'));
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">28장 - 테스트 경계</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2025-07-30T01:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jul 30, 2025
+    </time>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </div>
+<div class="post-tags"><a class="post-tag" href="/jekyll-theme-yat/tags.html#clean-architecture">#clean-architecture</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <ul>
+  <li>테스트는 시스템의 일부, 아키텍쳐에도 관여함
+    <ul>
+      <li>시스템의 나머지 요소가 아키텍쳐에 관여하는 것과 동등하게</li>
+      <li>어떤 면에서는 정말 평범하게 관여함</li>
+      <li>또 다른 면에서는 상당히 독특하게 관여함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="시스템-컴포넌트인-테스트">시스템 컴포넌트인 테스트</h3>
+
+<ul>
+  <li>테스트에 관련하여 상당한 혼동이 있다
+    <ul>
+      <li>어떤 종류의 테스트가 있는가?</li>
+      <li>단위 테스트와 통합 테스트 는 서로 다른가?</li>
+      <li>인수 테스트, 기능 테스트, Cucumber 테스트, TDD 테스트, BDD 테스트, 컴포넌트 테스트 등은 어떻지?</li>
+    </ul>
+  </li>
+  <li>
+    <p>이 책은 이러한 논란에 휘말리고 싶지 않은데, 다행히도 그럴 필요도 없다.</p>
+
+    <p>→ 아키텍처 관점에서는 모든 테스트가 동일하기 때문이다.</p>
+
+    <ul>
+      <li>
+        <p>TDD로 생성한 아주 작은 테스트이든, 아니면 대규모의 FitNesse, Cucumber, SpecFlow, JBehave 테스트이든</p>
+
+        <p>→ 이들 테스트는 아키텍처적으로 모두 동등하다.</p>
+      </li>
+    </ul>
+  </li>
+  <li>테스트는 태생적으로 의존성 규칙을 따른다.</li>
+  <li>테스트는 세부적이며 구체적인 것으로, 의존성은 항상 테스트 대상이 되는 코드를 향한다.
+    <ul>
+      <li>실제로 테스트는 아키텍처에서 가장 바깥쪽 원으로 생각할 수 있다.</li>
+      <li>시스템 내부의 어떤 것도 테스트에는 의존하지 않으며, 테스트는 시스템의 컴포넌트를 향해, 항상 원의 안쪽으로 의존한다.</li>
+    </ul>
+  </li>
+  <li>또한 테스트는 독립적으로 배포 가능하다.
+    <ul>
+      <li>사실 대다수의 경우 테스트는 테스트 시스템에만 배포하며, 상용 시스템에는 배포하지 않는다.</li>
+      <li>따라서 심지어 배포 독립성이 달리 필요하지 않은 시스템에서도 테스트는 독립적으로 배포될 것이다.</li>
+    </ul>
+  </li>
+  <li>테스트는 시스템 컴포넌트 중에서 가장 고립되어 있다.</li>
+  <li>테스트가 시스템 운영에 꼭 필요치는 않다.</li>
+  <li>어떤 사용자도 테스트에 의존하지 않는다.</li>
+  <li>테스트 의 역할은 운영이 아니라 개발을 지원하는 데 있다.</li>
+  <li>그렇다고 해서 테스트가 시스템 컴포넌트가 아니라는 뜻은 아니다.</li>
+  <li>사실 많은 면에서 테스트는 다른 모든 시스템 컴포넌트가 반드시 지켜야 하는 모델을 표현해준다.</li>
+</ul>
+
+<h3 id="테스트를-고려한-설계">테스트를 고려한 설계</h3>
+
+<ul>
+  <li>운영에 포함되지 않고, 시스템과 독립적으로 떨어져 있으니까, 테스트는 마치 본 시스템의 일부가 아닌 것처럼 취급된다.
+    <ul>
+      <li>이러한 관점으로 인해 테스트가 시스템의 설계와 잘 통합되지 않으면, 테스트는 깨지기 쉬워지고, 시스템은 뻣뻣해져서 변경하기가 어려워지는 치명적인 문제가 존재</li>
+    </ul>
+  </li>
+  <li>문제는 결합이다.
+    <ul>
+      <li>시스템에 강하게 결합된 테스트라면 시스템이 변경될 때 함께 변경되어야만 한다.</li>
+      <li>시스템 컴포넌트에서 생긴 아주 사소한 변경도, 이와 결합된 수많은 테스트를 망가뜨릴 수 있다.</li>
+    </ul>
+  </li>
+  <li>상황은 더 심각해질 수 있다.
+    <ul>
+      <li>시스템의 공통 컴포넌트가 변경되면 수백, 심지어 수천 개의 테스트가 망가진다.</li>
+      <li>이 문제는 깨지기 쉬운 테스트 문제 Fragile Tests Problem로 알려져 있다.</li>
+      <li>ex) GUI 테스트
+        <ul>
+          <li>로그인 → 특정화면인 상황에서 로그인이 변경되거나 삭제되면 그 이후에는 싹다 실패</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>변동성이 있는 것에 의존하지 말라
+    <ul>
+      <li>테스트를 고려해서 설계</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="테스트-api">테스트 API</h3>
+
+<ul>
+  <li>목표를 달성하려면 테스트가 모든 업무 규칙을 검증하는 데 사용할 수 있도록 특화된 API를 만들면 됨
+    <ul>
+      <li>이러한 API는 보안 제약사항을 무시할 수 있으며, (데이터베이스와 같은) 값비싼 자원은 건너뛰고, 시스템을 테스트 가능한 특정 상태로 강제하는 강력한 힘을 지녀야만 한다.</li>
+    </ul>
+  </li>
+  <li>이 API는 사용자 인터페이스가 사용하는 인터랙터와 인터페이스 어댑터들의 상위 집합이 될 것이다.</li>
+  <li>테스트 API는 테스트를 애플리케이션으로부터 분리할 목적으로 사용한다.
+    <ul>
+      <li>단순히 테스트를 UI에서 분리하는 것만이 아닌, 테스트 구조를 애플리케이션 구조로부터 결합을 분리하는 게 목표다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>→ UI 없이 업무 규칙을 테스트하고 싶다면 API를 만들어서 사용, 이렇게 만들어진 API는 인터페이스와 동일한 형태와 역할을 함</p>
+
+<h3 id="구조적-결함">구조적 결함</h3>
+
+<ul>
+  <li>구조적 결합은 테스트 결합 중에서 가장 강하며, 가장 은밀하게 퍼져 나가는 유형이다.
+    <ul>
+      <li>ex) 아래의 상황처럼 회원가입 버튼이 로그인버튼으로 변경이 되버리면 테스트가 다 깨짐</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nd">@Test</span>
+  <span class="kt">void</span> <span class="n">test_회원가입_버튼을_누르면_회원이_추가된다</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">new</span> <span class="nf">SignupPage</span><span class="o">().</span><span class="na">clickSignupButton</span><span class="o">();</span>
+      <span class="n">assertTrue</span><span class="o">(</span><span class="n">database</span><span class="o">.</span><span class="na">hasUser</span><span class="o">(</span><span class="s">"tubi"</span><span class="o">));</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>그러면 변경해야 하는 테스트가 많아지고, 변경하기 어려운 존재가 되기에, 뻣뻣하게 만들어버림</li>
+    </ul>
+  </li>
+  <li>테스트 API의 역할은 애플리케이션의 구조를 테스트로부터 숨기는 데 있다.
+    <ul>
+      <li>이렇게 만들면 상용 코드를 리팩터링하거나 진화시키더라도 테스트에는 전혀 영향을 주지 않는다.</li>
+      <li>또한 테스트를 리팩터링하거나 진화시킬 때도 상용 코드에는 전혀 영향을 주지 않는다.</li>
+      <li>
+    </li>
+</ul>
+  </li>
+  <li>이런 상황이 유지되면, 테스트 케이스가 많아져 구체적이고 더 특화된 형태로 변함
+    <ul>
+      <li>반대로 상용코드는 재사용을 위해서 더 추상적이고, 더 범용적인 형태로 변함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="보안">보안</h3>
+
+<ul>
+  <li>테스트 API가 지닌 강력한 힘을 운영 시스템에 배포하면 위험에 처할 수 있다.</li>
+  <li>위험을 피하고 싶다면, 테스트 API 자체와 테스트 API 중 위험한 부분의 구현부는 독립적으로 배포할 수 있는 컴포넌트로 분리해야 한다.</li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/2025/07/29/all-services-big-and-small.html" title="27장 - ‘크고 작은 모든’ 서비스들">
+          <div>27장 - ‘크고 작은 모든’ 서비스들</div>
+        </a><a class="next" href="/jekyll-theme-yat/2025/07/30/db-is-a-detail.html" title="30장 - 데이터베이스는 세부사항이다">
+          <div>30장 - 데이터베이스는 세부사항이다</div>
+        </a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/09/01/core-animation-build-animation.html" title="Core Animation - Build Animation">
+            Core Animation - Build Animation<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/09/01/core-animation-setting.html" title="Core Animation - Setting">
+            Core Animation - Setting<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/07/22/partial_boundaries.html" title="24장 - 부분적 경계">
+            24장 - 부분적 경계<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/jekyll-theme-yat/2025/08/04/analyzing-the-business-domain.html" title="1 - 비즈니스 도메인 분석하기">
+            1 - 비즈니스 도메인 분석하기<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Copyright <span class="copyleft">©</span> 2024-2026 Hyunwook Lee All rights reserved.</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
