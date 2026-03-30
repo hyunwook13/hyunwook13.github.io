@@ -14,22 +14,22 @@
 <meta property="og:locale" content="en_US">
 <meta name="description" content="암시적, 명시적 애니메이션이 존재 layer.opacity = 0.0 → 자연스러운 페이드 아웃 CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능 팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음 CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것 만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨 배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함 숫자 (opacity, cornerRadius) → NSNumber 사각형 (frame, bounds) → NSValue(CGRect) 좌표 (position) → NSValue(CGPoint) 배열 또는 CGPath 색상 (borderColor) → CGColor 이미지 (contents) → CGImage 배열 Keyframe Animation Timing">
 <meta property="og:description" content="암시적, 명시적 애니메이션이 존재 layer.opacity = 0.0 → 자연스러운 페이드 아웃 CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능 팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음 CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것 만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨 배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함 숫자 (opacity, cornerRadius) → NSNumber 사각형 (frame, bounds) → NSValue(CGRect) 좌표 (position) → NSValue(CGPoint) 배열 또는 CGPath 색상 (borderColor) → CGColor 이미지 (contents) → CGImage 배열 Keyframe Animation Timing">
-<link rel="canonical" href="/jekyll-theme-yat/2025/09/01/core-animation-animating.html">
-<meta property="og:url" content="/jekyll-theme-yat/2025/09/01/core-animation-animating.html">
+<link rel="canonical" href="/2025/09/01/core-animation-animating.html">
+<meta property="og:url" content="/2025/09/01/core-animation-animating.html">
 <meta property="og:site_name" content="Avoid Nil">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2025-09-01T01:02:00+00:00">
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="Core Animation - Animating">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-09-01T01:02:00+00:00","datePublished":"2025-09-01T01:02:00+00:00","description":"암시적, 명시적 애니메이션이 존재 layer.opacity = 0.0 → 자연스러운 페이드 아웃 CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능 팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음 CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것 만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨 배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함 숫자 (opacity, cornerRadius) → NSNumber 사각형 (frame, bounds) → NSValue(CGRect) 좌표 (position) → NSValue(CGPoint) 배열 또는 CGPath 색상 (borderColor) → CGColor 이미지 (contents) → CGImage 배열 Keyframe Animation Timing","headline":"Core Animation - Animating","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/2025/09/01/core-animation-animating.html"},"url":"/jekyll-theme-yat/2025/09/01/core-animation-animating.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-09-01T01:02:00+00:00","datePublished":"2025-09-01T01:02:00+00:00","description":"암시적, 명시적 애니메이션이 존재 layer.opacity = 0.0 → 자연스러운 페이드 아웃 CABasicAnimation를 직접 만들어서 설정 → 더 많은 제어 가능 팁) 명시적 애니메이션에서는 fromValue를 직접 지정하는 게 좋다 → 안하면 애니메이션이 안나올 수 있음 CAKeyframeAnimation는 하나의 애니메이션 사이에 하나 더 도착하는 장소를 추가하는 것 만약 맨 처음부터 끝까지 가는 애니메이션 중간에 CAKeyframeAnimation를 추가하면 아래처럼 됨 배열을 통해 도착지를 넣을 수 있고, 원하는 값에 따라 타입을 바꿔야 함 숫자 (opacity, cornerRadius) → NSNumber 사각형 (frame, bounds) → NSValue(CGRect) 좌표 (position) → NSValue(CGPoint) 배열 또는 CGPath 색상 (borderColor) → CGColor 이미지 (contents) → CGImage 배열 Keyframe Animation Timing","headline":"Core Animation - Animating","mainEntityOfPage":{"@type":"WebPage","@id":"/2025/09/01/core-animation-animating.html"},"url":"/2025/09/01/core-animation-animating.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="icon" href="/jekyll-theme-yat/assets/images/favicon/favicon.png" type="image/png">
+<link rel="icon" href="/assets/images/favicon/favicon.png" type="image/png">
   <link rel="canonical" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
-  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Avoid Nil">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Avoid Nil">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   <div class="wrapper">
     <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Avoid Nil" src="" onerror="this.style.display='none'">
   Avoid Nil
 </a>
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
           </label>
 
           <div class="trigger">
-<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
@@ -869,7 +869,7 @@ function googleTranslateElementInit() {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </div>
 <div class="post-tags">
-<a class="post-tag" href="/jekyll-theme-yat/tags.html#swift">#swift</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#core-animation">#core-animation</a>
+<a class="post-tag" href="/tags.html#swift">#swift</a><a class="post-tag" href="/tags.html#core-animation">#core-animation</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
@@ -1002,9 +1002,9 @@ function googleTranslateElementInit() {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/jekyll-theme-yat/2025/09/01/core-animation-setting.html" title="Core Animation - Setting">
+<a class="previous" href="/2025/09/01/core-animation-setting.html" title="Core Animation - Setting">
           <div>Core Animation - Setting</div>
-        </a><a class="next" href="/jekyll-theme-yat/2025/09/01/core-animation-build-animation.html" title="Core Animation - Build Animation">
+        </a><a class="next" href="/2025/09/01/core-animation-build-animation.html" title="Core Animation - Build Animation">
           <div>Core Animation - Build Animation</div>
         </a>
 </div>
@@ -1012,32 +1012,32 @@ function googleTranslateElementInit() {
       <div>Related Articles</div>
       <ul>
         <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/07/18/clean-architecture.html" title="22장 - 클린 아키텍쳐">
-            22장 - 클린 아키텍쳐<span class="post-badges">
+          <a class="post-link" href="/2025/07/30/test-boundary.html" title="28장 - 테스트 경계">
+            28장 - 테스트 경계<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/07/29/main-component.html" title="26장 - 메인 컴포넌트">
-            26장 - 메인 컴포넌트<span class="post-badges">
+          <a class="post-link" href="/2025/07/18/about-engine.html" title="엔진 용어에 대해서">
+            엔진 용어에 대해서<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/09/02/core-animation-changing-a-layers-default-behavior.html" title="Core Animation - Changing a Layer’s Default Behavior">
-            Core Animation - Changing a Layer’s Default Behavior<span class="post-badges">
+          <a class="post-link" href="/2025/09/01/core-animation-build-animation.html" title="Core Animation - Build Animation">
+            Core Animation - Build Animation<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html" title="Core Animation - Improving Animation Performance">
-            Core Animation - Improving Animation Performance<span class="post-badges">
+          <a class="post-link" href="/2025/07/14/what-is-malware.html" title="멀웨어란 무엇일까?">
+            멀웨어란 무엇일까?<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
@@ -1178,7 +1178,7 @@ function googleTranslateElementInit() {
 
       </div>
     </main><footer class="site-footer h-card">
-  <data class="u-url" href="/jekyll-theme-yat/"></data>
+  <data class="u-url" href="/"></data>
 
   <div class="wrapper">
     <div class="site-footer-inner">
@@ -1186,7 +1186,7 @@ function googleTranslateElementInit() {
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
-      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
 </div>
     </div>
   </div>

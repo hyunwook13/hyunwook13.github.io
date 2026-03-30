@@ -14,22 +14,22 @@
 <meta property="og:locale" content="en_US">
 <meta name="description" content="코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님 레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다 NSView의 기본 redraw 정책은 원래의 그리기 방식을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음 → 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 NSViewLayerContentsRedrawOnSetNeedsDisplay 권장 레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다">
 <meta property="og:description" content="코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님 레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다 NSView의 기본 redraw 정책은 원래의 그리기 방식을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음 → 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 NSViewLayerContentsRedrawOnSetNeedsDisplay 권장 레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다">
-<link rel="canonical" href="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html">
-<meta property="og:url" content="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html">
+<link rel="canonical" href="/2025/09/02/core-animation-improving-animation-performance.html">
+<meta property="og:url" content="/2025/09/02/core-animation-improving-animation-performance.html">
 <meta property="og:site_name" content="Avoid Nil">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2025-09-02T01:00:00+00:00">
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="Core Animation - Improving Animation Performance">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-09-02T01:00:00+00:00","datePublished":"2025-09-02T01:00:00+00:00","description":"코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님 레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다 NSView의 기본 redraw 정책은 원래의 그리기 방식을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음 → 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 NSViewLayerContentsRedrawOnSetNeedsDisplay 권장 레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다","headline":"Core Animation - Improving Animation Performance","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html"},"url":"/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hyunwook Lee"},"dateModified":"2025-09-02T01:00:00+00:00","datePublished":"2025-09-02T01:00:00+00:00","description":"코어 애니메이션을 사용하면 프레임 속도는 일반적으로 개선되지만 만능은 아님 레이어 정책이나 업데이트 방식에 따라 다르기에, Insturment를 통해서 확인을 해야한다 NSView의 기본 redraw 정책은 원래의 그리기 방식을 그대로 유지하는데, 불필요하게 전체를 다시 그리는 경우가 많음 → 성능이 떨어질 수 있다, 필요할 때만 다시 그리는 정책을 도입 NSViewLayerContentsRedrawOnSetNeedsDisplay 권장 레이어를 다시 그리는 것이 아닌 업데이트를 통해 CPU 사용량을 줄일 수 있다","headline":"Core Animation - Improving Animation Performance","mainEntityOfPage":{"@type":"WebPage","@id":"/2025/09/02/core-animation-improving-animation-performance.html"},"url":"/2025/09/02/core-animation-improving-animation-performance.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="icon" href="/jekyll-theme-yat/assets/images/favicon/favicon.png" type="image/png">
+<link rel="icon" href="/assets/images/favicon/favicon.png" type="image/png">
   <link rel="canonical" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
-  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Avoid Nil">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Avoid Nil">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   <div class="wrapper">
     <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Avoid Nil" src="" onerror="this.style.display='none'">
   Avoid Nil
 </a>
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
           </label>
 
           <div class="trigger">
-<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
@@ -869,7 +869,7 @@ function googleTranslateElementInit() {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
   </div>
 <div class="post-tags">
-<a class="post-tag" href="/jekyll-theme-yat/tags.html#swift">#swift</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#core-animation">#core-animation</a>
+<a class="post-tag" href="/tags.html#swift">#swift</a><a class="post-tag" href="/tags.html#core-animation">#core-animation</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
@@ -937,9 +937,9 @@ function googleTranslateElementInit() {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/jekyll-theme-yat/2025/09/02/core-animation-changing-a-layers-default-behavior.html" title="Core Animation - Changing a Layer’s Default Behavior">
+<a class="previous" href="/2025/09/02/core-animation-changing-a-layers-default-behavior.html" title="Core Animation - Changing a Layer’s Default Behavior">
           <div>Core Animation - Changing a Layer’s Default Behavior</div>
-        </a><a class="next" href="/jekyll-theme-yat/2025/09/05/after-kwdc25.html" title="KWDC25 후기">
+        </a><a class="next" href="/2025/09/05/after-kwdc25.html" title="KWDC25 후기">
           <div>KWDC25 후기</div>
         </a>
 </div>
@@ -947,15 +947,15 @@ function googleTranslateElementInit() {
       <div>Related Articles</div>
       <ul>
         <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/09/02/core-animation-improving-animation-performance.html" title="Core Animation - Improving Animation Performance">
-            Core Animation - Improving Animation Performance<span class="post-badges">
+          <a class="post-link" href="/2025/09/02/core-animation-changing-a-layers-default-behavior.html" title="Core Animation - Changing a Layer’s Default Behavior">
+            Core Animation - Changing a Layer’s Default Behavior<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/07/09/error-in-publish.html" title="Error in publish">
+          <a class="post-link" href="/2025/07/09/error-in-publish.html" title="Error in publish">
             Error in publish<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
@@ -963,16 +963,16 @@ function googleTranslateElementInit() {
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/07/22/partial_boundaries.html" title="24장 - 부분적 경계">
-            24장 - 부분적 경계<span class="post-badges">
+          <a class="post-link" href="/2025/09/01/core-animation-basic.html" title="Core Animation - Basic">
+            Core Animation - Basic<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/jekyll-theme-yat/2025/07/08/first-blog.html" title="블로그 첫 글">
-            블로그 첫 글<span class="post-badges">
+          <a class="post-link" href="/2025/07/18/clean-architecture.html" title="22장 - 클린 아키텍쳐">
+            22장 - 클린 아키텍쳐<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
@@ -1113,7 +1113,7 @@ function googleTranslateElementInit() {
 
       </div>
     </main><footer class="site-footer h-card">
-  <data class="u-url" href="/jekyll-theme-yat/"></data>
+  <data class="u-url" href="/"></data>
 
   <div class="wrapper">
     <div class="site-footer-inner">
@@ -1121,7 +1121,7 @@ function googleTranslateElementInit() {
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
-      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
 </div>
     </div>
   </div>
